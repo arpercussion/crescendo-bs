@@ -14,7 +14,7 @@ angular.module('crescendoBs')
     $scope.previewTabsActiveTab = 0;
 
 
-
+    // TODO: pull contents from Content API
     $scope.contents = [
       {
         "id": "1",

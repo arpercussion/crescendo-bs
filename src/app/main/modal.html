@@ -1,12 +1,13 @@
 <div class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-ng-controller="AmplifyCtrl">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+      <!-- EXIT BUTTON -->
       <div class="modal-header">
         <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
       </div>
+      <!-- MODAL CONTENT -->
       <div class="modal-body">
-
-
+        <!-- HELP VIEW -->
         <div ng-if="currentState == 0" class="text-center amp-help">
           <h1>Let's amplify.</h1>
           <br/>
@@ -40,7 +41,7 @@
           <br/>
           <button data-ng-click="incrementState()" class="btn btn-primary btn-lg">Get Started</button>
         </div>
-
+        <!-- HELP VIEW -->
         <div class="amp-view" ng-if="currentState == 1">
           <p class="lead">Select a piece of content to amplify.</p>
           <p>If you want to amplify a particular piece of content, select one to continue.</p>
@@ -88,7 +89,7 @@
 
           <!--<pre>{{ activeContent.item | json }}</pre>-->
         </div>
-
+        <!-- SELECT CONTENT VIEW -->
         <div class="amp-view" ng-if="currentState == 2">
           <p class="lead">Select Social Media Accounts</p>
           <p>Select a social media account you would like to post to.</p>
@@ -123,7 +124,7 @@
             </tbody>
           </table>
         </div>
-
+        <!-- SELECT SOCIAL CHANNELS VIEW -->
         <div class="amp-view" ng-if="currentState == 3">
           <p class="lead">Compose a message</p>
           <div bs-active-pane="editorTabsActiveTab" bs-tabs>
@@ -132,7 +133,7 @@
             </div>
           </div>
         </div>
-
+        <!-- EDIT POST VIEW -->
         <div class="amp-view" ng-if="currentState == 4">
           <p class="lead">Preview your posts.</p>
           <div bs-active-pane="previewTabsActiveTab" bs-tabs>
@@ -141,7 +142,7 @@
             </div>
           </div>
         </div>
-
+        <!-- PREVIEW POST VIEW -->
         <div class="amp-view" ng-if="currentState == 5">
           <p class="lead">Schedule your post.</p>
 
@@ -222,21 +223,22 @@
             <button type="submit" class="btn btn-primary btn-lg" ng-click="incrementState()">Schedule your post</button>
           </form>
         </div>
-
+        <!-- SUCCESS/ERROR VIEW -->
         <div class="amp-view text-center" ng-if="currentState == 6">
 
           <i class="fa fa-5x fa-check-circle text-success"></i>
           <p>6</p>
 
         </div>
-
-
       </div>
+      <!-- FOOTER -->
       <div class="modal-footer">
         <div class="row">
+          <!-- BACK BUTTON -->
           <div class="col-xs-4">
             <button ng-show="currentState >= 1" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
           </div>
+          <!-- PROGRESS BULLETS -->
           <div class="col-xs-4">
             <p class="text-center text-muted" ng-show="currentState >= 1 && currentState < 6">
               <small>
@@ -249,6 +251,7 @@
               </small>
             </p>
           </div>
+          <!-- NEXT BUTTON -->
           <div class="col-xs-4">
             <button ng-show="currentState >= 1 && currentState <= 4" type="button" class="btn btn-link" ng-click="incrementState()">Next &nbsp; <i class="fa fa-angle-double-right"></i></button>
             <p class="text-muted pull-right" ng-show="currentState == 0">
@@ -257,12 +260,6 @@
             </p>
           </div>
         </div>
-
-
-
-
-
-
       </div>
     </div>
   </div>
