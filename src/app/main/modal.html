@@ -1,0 +1,269 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-ng-controller="AmplifyCtrl">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div ng-if="currentState == 0" class="text-center amp-help">
+          <h1>Let's amplify.</h1>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <div class="row">
+            <div></div>
+            <div class="col-xs-3 help-tip-1">
+              <p class="lead text-muted">First</p>
+              <p>1. Select a document to promote. Or not...</p>
+            </div>
+            <div class="col-xs-3 help-tip-2">
+              <p class="lead text-muted">Second</p>
+              <p>2. Select your social accounts.</p>
+            </div>
+            <div class="col-xs-3 help-tip-3">
+              <p class="lead text-muted">Third</p>
+              <p>3. Author your message.</p>
+            </div>
+            <div class="col-xs-3 help-tip-4">
+              <p class="lead text-muted">Fourth</p>
+              <p>4. Schedule your amp.</p>
+            </div>
+          </div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <button data-ng-click="incrementState()" class="btn btn-primary btn-lg">Get Started</button>
+        </div>
+
+        <div class="amp-view" ng-if="currentState == 1">
+          <p class="lead">Select a piece of content to amplify.</p>
+          <p>If you want to amplify a particular piece of content, select one to continue.</p>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Type</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Publication Date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+              <tr ng-repeat="content in contents">
+                <td>
+                  <input type="radio" name="content" ng-value="content" ng-model="activeContent.item" />
+                </td>
+                <td>
+                  {{ content.type }}
+                </td>
+                <td>
+                  {{ content.title }}
+                </td>
+                <td>
+                  {{ content.author }}
+                </td>
+                <td>
+                  {{ content.publicationDate | date:'medium' }}
+                </td>
+              </tr>
+
+
+              <tr>
+                <td><input type="radio" value="" ng-model="activeContent.item" /></td>
+                <td></td>
+                <td><em class="text-muted">No content</em></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <!--<pre>{{ activeContent.item | json }}</pre>-->
+        </div>
+
+        <div class="amp-view" ng-if="currentState == 2">
+          <p class="lead">Select Social Media Accounts</p>
+          <p>Select a social media account you would like to post to.</p>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Type</th>
+              <th>Handle</th>
+              <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><input type="checkbox" value="0" /></td>
+              <td><i class="fa fa-facebook"></i></td>
+              <td>karen.peña</td>
+              <td>Karen Peña</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" value="1" /></td>
+              <td><i class="fa fa-facebook"></i></td>
+              <td>Nightime Solar</td>
+              <td>Karen Peña</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" value="1" /></td>
+              <td><i class="fa fa-twitter"></i></td>
+              <td>Nightime Solar</td>
+              <td>Nightime Solar</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="amp-view" ng-if="currentState == 3">
+          <p class="lead">Compose a message</p>
+          <div bs-active-pane="editorTabsActiveTab" bs-tabs>
+            <div ng-repeat="tab in editorTabs" title="{{ tab.title }}" bs-pane>
+              <div ng-include="tab.template"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="amp-view" ng-if="currentState == 4">
+          <p class="lead">Preview your posts.</p>
+          <div bs-active-pane="previewTabsActiveTab" bs-tabs>
+            <div ng-repeat="tab in previewTabs" title="{{ tab.title }}" bs-pane>
+              <div ng-include="tab.template"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="amp-view" ng-if="currentState == 5">
+          <p class="lead">Schedule your post.</p>
+
+          <table class="table table-striped">
+            <thead>
+
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Networks</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>
+                  <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
+                </td>
+                <td>
+                  <input class="form-control" type="text" bs-timepicker="" ng-model="event.time" />
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-facebook"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-google-plus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-linkedin"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-default btn-sm pull-right">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
+                </td>
+                <td>
+                  <input class="form-control" type="text" bs-timepicker="" ng-model="event.time" />
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-facebook"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-google-plus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default">
+                    <i class="fa fa-linkedin"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-default btn-sm pull-right">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <form ng-submit="incrementState()" class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="incrementState()">Schedule your post</button>
+          </form>
+        </div>
+
+        <div class="amp-view text-center" ng-if="currentState == 6">
+
+          <i class="fa fa-5x fa-check-circle text-success"></i>
+          <p>6</p>
+
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-xs-4">
+            <button ng-show="currentState >= 1" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
+          </div>
+          <div class="col-xs-4">
+            <p class="text-center text-muted" ng-show="currentState >= 1 && currentState < 6">
+              <small>
+                <i ng-click="currentState = 1" ng-class="{ 'text-primary': currentState == 1 }" class="fa fa-circle"></i> &nbsp;
+                <i ng-click="currentState = 2" ng-class="{ 'text-primary': currentState == 2 }" class="fa fa-circle"></i> &nbsp;
+                <i ng-click="currentState = 3" ng-class="{ 'text-primary': currentState == 3 }" class="fa fa-circle"></i> &nbsp;
+                <i ng-click="currentState = 4" ng-class="{ 'text-primary': currentState == 4 }" class="fa fa-circle"></i> &nbsp;
+                <i ng-click="currentState = 5" ng-class="{ 'text-primary': currentState == 5 }" class="fa fa-circle"></i> &nbsp;
+                <!--<i ng-click="currentState = 6" ng-class="{ 'text-primary': currentState == 6 }" class="fa fa-circle"></i>-->
+              </small>
+            </p>
+          </div>
+          <div class="col-xs-4">
+            <button ng-show="currentState >= 1 && currentState <= 4" type="button" class="btn btn-link" ng-click="incrementState()">Next &nbsp; <i class="fa fa-angle-double-right"></i></button>
+            <p class="text-muted pull-right" ng-show="currentState == 0">
+              <input type="checkbox" /> &nbsp;
+              <small>Hide this help message in the future.</small>
+            </p>
+          </div>
+        </div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

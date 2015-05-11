@@ -1,0 +1,148 @@
+<div class="container">
+
+  <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </div>
+
+  <div class="jumbotron text-center">
+    <h1>'Allo, 'Allo!</h1>
+    <p class="lead">
+      Always a pleasure scaffolding your apps.
+    </p>
+    <p><a class="btn btn-lg btn-success sq" ng-click="showModal()">Splendid!</a></p>
+  </div>
+
+  <h1>h1. Bootstrap heading</h1>
+  <h2>h2. Bootstrap heading</h2>
+  <h3>h3. Bootstrap heading</h3>
+  <h4>h4. Bootstrap heading</h4>
+  <h5>h5. Bootstrap heading</h5>
+  <h6>h6. Bootstrap heading</h6>
+  <hr/>
+  <p>Lorem ipsum dolor sit amet, <a href="#/">consectetur</a> adipiscing elit. Cras dolor ligula, viverra vel ex vitae, convallis malesuada nisi. Phasellus a arcu aliquet, scelerisque urna eget, tempus tellus. Sed dignissim maximus orci quis faucibus. Vestibulum eget arcu vel felis pulvinar pretium ac quis nunc. Aliquam iaculis molestie bibendum. Fusce quis vestibulum lectus, ac rhoncus nisi. Proin nisi enim, condimentum vitae ornare et, luctus et turpis. Curabitur eu eros sed tortor tincidunt ultricies eget et arcu. Curabitur a sapien eget erat pellentesque sagittis eget a risus. Nullam a dui eu lacus elementum convallis eu at orci. Morbi in urna eu augue volutpat aliquet vestibulum sit amet sapien. Curabitur eget dolor at erat egestas dapibus non nec turpis. Mauris vel rutrum tortor. Vestibulum luctus vestibulum nulla, sit amet commodo libero tincidunt ut.</p>
+  <p class="lead">Curabitur facilisis ornare justo a vestibulum. In rutrum fermentum eros vel fringilla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+  <hr/>
+<code>
+  $scope.showModal = function() {
+    $scope.amplifyModal.$promise.then($scope.amplifyModal.show);
+  };
+</code>
+  <br/><br/><br/>
+<pre>
+  $scope.showModal = function() {
+    $scope.amplifyModal.$promise.then($scope.amplifyModal.show);
+  };
+</pre>
+  <br/><br/><br/>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br/><br/><br/>
+
+  <button type="button" class="btn btn-default">Default</button>
+
+  <button type="button" class="btn btn-primary">Primary</button>
+
+  <button type="button" class="btn btn-success">Success</button>
+
+  <button type="button" class="btn btn-info">Info</button>
+
+  <button type="button" class="btn btn-warning">Warning</button>
+
+  <button type="button" class="btn btn-danger">Danger</button>
+
+  <button type="button" class="btn btn-link">Link</button>
+
+  <br/><br/><br/>
+
+  <button type="button" class="btn btn-default sq">Default</button>
+
+  <button type="button" class="btn btn-primary sq">Primary</button>
+
+  <button type="button" class="btn btn-success sq">Success</button>
+
+  <button type="button" class="btn btn-info sq">Info</button>
+
+  <button type="button" class="btn btn-warning sq">Warning</button>
+
+  <button type="button" class="btn btn-danger sq">Danger</button>
+
+  <button type="button" class="btn btn-link sq">Link</button>
+
+  <br/><br/><br/>
+
+  <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+  <p class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+  <p class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+  <p class="text-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+  <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+  <p class="text-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+  <br/><br/><br/>
+
+  <p class="bg-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+  <p class="bg-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+  <p class="bg-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+  <p class="bg-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+  <p class="bg-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+
+
+  <br/><br/><br/>
+
+
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control sq" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> Check me out
+      </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <br/><br/><br/>
+
+
+  <br/><br/><br/>
+
+
+  <br/><br/><br/>
+
+
+</div>
