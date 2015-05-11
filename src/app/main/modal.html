@@ -41,10 +41,12 @@
           <br/>
           <button data-ng-click="incrementState()" class="btn btn-primary btn-lg">Get Started</button>
         </div>
-        <!-- HELP VIEW -->
+        <!-- SELECT CONTENT VIEW -->
         <div class="amp-view" ng-if="currentState == 1">
+          <!-- INTRO TEXT -->
           <p class="lead">Select a piece of content to amplify.</p>
           <p>If you want to amplify a particular piece of content, select one to continue.</p>
+          <!-- CONTENT TABLE -->
           <table class="table table-striped">
             <thead>
             <tr>
@@ -56,7 +58,7 @@
             </tr>
             </thead>
             <tbody>
-
+              <!-- CONTENT ROW REPEATER -->
               <tr ng-repeat="content in contents">
                 <td>
                   <input type="radio" name="content" ng-value="content" ng-model="activeContent.item" />
@@ -74,8 +76,7 @@
                   {{ content.publicationDate | date:'medium' }}
                 </td>
               </tr>
-
-
+              <!-- SELECT NONE ROW -->
               <tr>
                 <td><input type="radio" value="" ng-model="activeContent.item" /></td>
                 <td></td>
@@ -83,16 +84,15 @@
                 <td></td>
                 <td></td>
               </tr>
-
             </tbody>
           </table>
-
-          <!--<pre>{{ activeContent.item | json }}</pre>-->
         </div>
-        <!-- SELECT CONTENT VIEW -->
+        <!-- SELECT SOCIAL CHANNELS VIEW -->
         <div class="amp-view" ng-if="currentState == 2">
+          <!-- INTRO TEXT -->
           <p class="lead">Select Social Media Accounts</p>
           <p>Select a social media account you would like to post to.</p>
+          <!-- SOCIAL CHANNELS TABLE -->
           <table class="table table-striped">
             <thead>
             <tr>
@@ -124,42 +124,43 @@
             </tbody>
           </table>
         </div>
-        <!-- SELECT SOCIAL CHANNELS VIEW -->
+        <!-- EDIT POST VIEW -->
         <div class="amp-view" ng-if="currentState == 3">
+          <!-- INTRO TEXT -->
           <p class="lead">Compose a message</p>
+          <!-- EDITOR TABS -->
           <div bs-active-pane="editorTabsActiveTab" bs-tabs>
             <div ng-repeat="tab in editorTabs" title="{{ tab.title }}" bs-pane>
               <div ng-include="tab.template"></div>
             </div>
           </div>
         </div>
-        <!-- EDIT POST VIEW -->
+        <!-- PREVIEW POST VIEW -->
         <div class="amp-view" ng-if="currentState == 4">
+          <!-- INTRO TEXT -->
           <p class="lead">Preview your posts.</p>
+          <!-- PREVIEW TABS -->
           <div bs-active-pane="previewTabsActiveTab" bs-tabs>
             <div ng-repeat="tab in previewTabs" title="{{ tab.title }}" bs-pane>
               <div ng-include="tab.template"></div>
             </div>
           </div>
         </div>
-        <!-- PREVIEW POST VIEW -->
+        <!-- SCHEDULE VIEW -->
         <div class="amp-view" ng-if="currentState == 5">
+          <!-- INTRO TEXT -->
           <p class="lead">Schedule your post.</p>
-
+          <!-- SCHEDULE TABLE -->
           <table class="table table-striped">
             <thead>
-
               <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Networks</th>
                 <th></th>
               </tr>
-
             </thead>
-
             <tbody>
-
               <tr>
                 <td>
                   <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
@@ -187,7 +188,6 @@
                   </button>
                 </td>
               </tr>
-
               <tr>
                 <td>
                   <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
@@ -215,20 +215,17 @@
                   </button>
                 </td>
               </tr>
-
             </tbody>
           </table>
-
+          <!-- FINAL SUBMIT BUTTON -->
           <form ng-submit="incrementState()" class="text-center">
             <button type="submit" class="btn btn-primary btn-lg" ng-click="incrementState()">Schedule your post</button>
           </form>
         </div>
         <!-- SUCCESS/ERROR VIEW -->
         <div class="amp-view text-center" ng-if="currentState == 6">
-
+          <!-- SUCCESS TEXT -->
           <i class="fa fa-5x fa-check-circle text-success"></i>
-          <p>6</p>
-
         </div>
       </div>
       <!-- FOOTER -->
