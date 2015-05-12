@@ -928,7 +928,13 @@ $hr-border:                   $gray-lighter !default;
 
 .form-control{
   box-shadow: none;
+  color: lighten($brand-primary, 10%);
+  font-weight: 100;
 }
+.form-control:focus{
+  color: $brand-primary;
+}
+
 *:focus{
   box-shadow: none !important;
   outline: none !important;
@@ -936,7 +942,6 @@ $hr-border:                   $gray-lighter !default;
 
 .form-group > label{
   text-transform: uppercase;
-  //color: $brand-primary;
   font-size: .9em;
   font-weight: 100;
 }
@@ -945,7 +950,6 @@ label{
   color: $grey-dove-dark;
 }
 input.form-control{
-  color: $brand-primary;
   font-weight: 100;
 }
 
@@ -978,6 +982,31 @@ a:hover, a:focus{
   border-radius: 0;
 }
 
+
+.nav-underlined{
+  border-bottom: solid thin $grey-dove;
+}
+
+.nav-underlined > li{
+  float: left;
+}
+.nav-underlined > li > a{
+  color: $grey-dove;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.nav-underlined > li.active > a{
+  color: $brand-primary;
+}
+.nav-underlined > .active{
+  border-bottom: solid 2px $brand-primary;
+  top: 1px;
+}
 
 
 
@@ -1034,10 +1063,12 @@ option, select{
   overflow: scroll;
 }
 
+.nav > li > a{
+  cursor: pointer;
+}
+
 
 // Animations
-
-
 .help-tip-1,
 .help-tip-2,
 .help-tip-3,
@@ -1094,3 +1125,11 @@ option, select{
   -o-animation: fadeOutUp .25s;
   animation: fadeOutUp .25s;
 }
+
+.fade-in.ng-hide-remove{
+  -webkit-animation: fadeIn .5s;
+  -o-animation: fadeIn .5s;
+  animation: fadeIn .5s;
+}
+
+

@@ -44,8 +44,11 @@
         <!-- SELECT CONTENT VIEW -->
         <div class="amp-view" ng-if="currentState == 1">
           <!-- INTRO TEXT -->
-          <p class="lead">Select a piece of content to amplify.</p>
-          <p>If you want to amplify a particular piece of content, select one to continue.</p>
+          <h4>Select a piece of content to amplify.</h4>
+          <p><small>If you want to amplify a particular piece of content, select one to continue.</small></p>
+          <p class="alert alert-warning" ng-if="userHasEdited">
+            <strong>Warning: </strong>Changing your content will delete your current post.
+          </p>
           <!-- CONTENT TABLE -->
           <table class="table table-striped">
             <thead>
@@ -95,56 +98,86 @@
           <!-- SOCIAL CHANNELS TABLE -->
           <table class="table table-striped">
             <thead>
-            <tr>
-              <th></th>
-              <th>Type</th>
-              <th>Handle</th>
-              <th>Owner</th>
-            </tr>
+              <tr>
+                <th></th>
+                <th>Type</th>
+                <th>Handle</th>
+                <th>Owner</th>
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><input type="checkbox" value="0" /></td>
-              <td><i class="fa fa-facebook"></i></td>
-              <td>karen.peña</td>
-              <td>Karen Peña</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" value="1" /></td>
-              <td><i class="fa fa-facebook"></i></td>
-              <td>Nightime Solar</td>
-              <td>Karen Peña</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" value="1" /></td>
-              <td><i class="fa fa-twitter"></i></td>
-              <td>Nightime Solar</td>
-              <td>Nightime Solar</td>
-            </tr>
+              <!-- SOCIAL ACCOUNT REPEATER -->
+              <tr ng-repeat="account in socialAccounts">
+                <td><input type="checkbox" ng-model="account.isActive" ng-change="activeAccountChange(account.isActive, account)" value="0" /></td>
+                <td>
+                  <i class="fa fa-facebook" ng-if="account.channel == 'Facebook'"></i>
+                  <i class="fa fa-twitter" ng-if="account.channel == 'Twitter'"></i>
+                  <i class="fa fa-google-plus" ng-if="account.channel == 'Google'"></i>
+                  <i class="fa fa-linkedin" ng-if="account.channel == 'LinkedIn'"></i>
+                </td>
+                <td>{{ account.handle }}</td>
+                <td>{{ account.name }}</td>
+              </tr>
             </tbody>
           </table>
+          <!--<pre>{{ activeNetworks | json }}</pre>-->
         </div>
         <!-- EDIT POST VIEW -->
         <div class="amp-view" ng-if="currentState == 3">
           <!-- INTRO TEXT -->
           <p class="lead">Compose a message</p>
           <!-- EDITOR TABS -->
-          <div bs-active-pane="editorTabsActiveTab" bs-tabs>
-            <div ng-repeat="tab in editorTabs" title="{{ tab.title }}" bs-pane>
-              <div ng-include="tab.template"></div>
-            </div>
-          </div>
+          <!--  nav-justified -->
+          <ul class="nav nav-underlined">
+            <li ng-class="{ 'active': editorTabs.activeTab == 'Facebook' }" ng-if="activeNetworks.Facebook !== 0">
+              <a ng-click=" editorTabs.activeTab = 'Facebook' ">Facebook</a>
+            </li>
+            <li ng-class="{ 'active': editorTabs.activeTab == 'Twitter' }" ng-if="activeNetworks.Twitter !== 0">
+              <a ng-click="editorTabs.activeTab = 'Twitter'">Twitter</a>
+            </li>
+            <li ng-class="{ 'active': editorTabs.activeTab == 'LinkedIn' }" ng-if="activeNetworks.LinkedIn !== 0">
+              <a ng-click="editorTabs.activeTab = 'LinkedIn' ">LinkedIn</a>
+            </li>
+            <li ng-class="{ 'active': editorTabs.activeTab == 'Google' }" ng-if="activeNetworks.Google !== 0">
+              <a ng-click=" editorTabs.activeTab = 'Google' ">Google</a>
+            </li>
+          </ul>
+          <br/>
+          <!-- FACEBOOK TEXT -->
+          <modal-editor  class="fade-in" ng-show="editorTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0" post-text="editorTabs.Facebook.content"></modal-editor>
+          <!-- TWITTER TEXT -->
+          <modal-editor class="fade-in" max-chars="140" ng-show="editorTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0" post-text="editorTabs.Twitter.content"></modal-editor>
+          <!-- LINKEDIN TEXT -->
+          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0" post-text="editorTabs.LinkedIn.content"></modal-editor>
+          <!-- GOOGLE TEXT -->
+          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'Google' && activeNetworks.Google !== 0" post-text="editorTabs.Google.content"></modal-editor>
+
+          <p ng-if="activeNetworks.Facebook == 0 && activeNetworks.Twitter == 0 && activeNetworks.LinkedIn == 0 && activeNetworks.Google == 0" class="text-muted text-center">
+            <em>Please select a sending account to continue.</em>
+          </p>
+
         </div>
         <!-- PREVIEW POST VIEW -->
         <div class="amp-view" ng-if="currentState == 4">
           <!-- INTRO TEXT -->
           <p class="lead">Preview your posts.</p>
           <!-- PREVIEW TABS -->
-          <div bs-active-pane="previewTabsActiveTab" bs-tabs>
-            <div ng-repeat="tab in previewTabs" title="{{ tab.title }}" bs-pane>
-              <div ng-include="tab.template"></div>
-            </div>
-          </div>
+          <ul class="nav nav-underlined">
+            <li ng-class="{ 'active': previewTabs.activeTab == 'Facebook' }" ng-if="activeNetworks.Facebook !== 0">
+              <a ng-click=" previewTabs.activeTab = 'Facebook' ">Facebook</a>
+            </li>
+            <li ng-class="{ 'active': previewTabs.activeTab == 'Twitter' }" ng-if="activeNetworks.Twitter !== 0">
+              <a ng-click=" previewTabs.activeTab = 'Twitter' ">Twitter</a>
+            </li>
+            <li ng-class="{ 'active': previewTabs.activeTab == 'LinkedIn' }" ng-if="activeNetworks.LinkedIn !== 0">
+              <a ng-click=" previewTabs.activeTab = 'LinkedIn' ">LinkedIn</a>
+            </li>
+            <li ng-class="{ 'active': previewTabs.activeTab == 'Google' }" ng-if="activeNetworks.Google !== 0">
+              <a ng-click=" previewTabs.activeTab = 'Google' ">Google</a>
+            </li>
+          </ul>
+          <br/>
+
         </div>
         <!-- SCHEDULE VIEW -->
         <div class="amp-view" ng-if="currentState == 5">

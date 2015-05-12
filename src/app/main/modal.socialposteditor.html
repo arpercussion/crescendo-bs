@@ -1,32 +1,43 @@
 <div>
   <div class="row">
     <div class="col-xs-4">
-      <select name="hashtags" id="hashtags" class="form-control">
+      <select name="hashtags" id="hashtags" class="form-control" ng-model="activeHashtag"
+              ng-options="tag.tag as tag.tag for tag in hashtags" ng-change="addHashtag(activeHashtag)">
         <option value="">Add a hashtag</option>
       </select>
     </div>
     <div class="col-xs-4">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Add a shortened link" />
+        <input type="text" class="form-control" placeholder="Add a shortened link" ng-model="fullUrl" />
         <span class="input-group-btn">
-          <button class="btn btn-default" type="button"><i class="fa fa-link"></i></button>
+          <button ng-click="minifyUrl(fullUrl)" class="btn btn-default" type="button"><i class="fa fa-link"></i></button>
         </span>
       </div>
     </div>
     <div class="col-xs-4">
-      <select name="img" id="img" class="form-control">
+      <select name="img" id="img" class="form-control" ng-model="activeImg"
+              ng-options="img.url as img.url for img in images" ng-change="addImage(activeImg)">
         <option value="">Add an image</option>
       </select>
     </div>
     <div class="clear-fix">&nbsp;</div>
     <div class="col-xs-12">
-      <textarea class="form-control" name="postData" id="social-post" cols="30" rows="7"></textarea>
+      <textarea class="form-control" name="postData" id="social-post" ng-model="postText" ng-trim="false" cols="30" rows="7"></textarea>
     </div>
     <div class="clear-fix">&nbsp;</div>
-    <div class="col-xs-12">
-      <div class="well well-sm">
-        <p class="text-muted">No images selected yet.</p>
-      </div>
+    <div class="col-xs-2">
+      <p class="text-muted">
+        <small>Attached image:</small>
+      </p>
+    </div>
+    <div class="col-xs-4">
+      <img ng-if="activeImg" style="max-height: 50px; max-width: 50px;" ng-src="{{ activeImg }}" alt="" class="img-responsive img-rounded"/>
+      <p class="text-muted" ng-if="!activeImg"><em><small>None.</small></em></p>
+    </div>
+    <div class="col-xs-6">
+      <p ng-show="maxChars" id="max-chars" class="pull-right" ng-class="{ 'text-muted': postText.length <= limit, 'text-primary': postText.length > limit }">
+        <small>Characters: {{ postText.length }} / {{ limit }}</small>
+      </p>
     </div>
   </div>
 

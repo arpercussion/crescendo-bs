@@ -3,7 +3,7 @@ angular.module('crescendoBs')
     "use strict";
 
     // Current view of Amplify Modal
-    $scope.currentState = 1;
+    $scope.currentState = 0;
     // Selected piece of content to amplify
     $scope.activeContent = {
       "item": ""
@@ -22,7 +22,7 @@ angular.module('crescendoBs')
         "type": "Blog",
         "author": "Karen Peña",
         "publicationDate": new Date('04/15/15 02:30 PM'),
-        "percLi": "http://perc.li/E450x"
+        "url": "http://perc.li/E450x"
       },
       {
         "id": "2",
@@ -30,7 +30,7 @@ angular.module('crescendoBs')
         "type": "Blog",
         "author": "Karen Peña",
         "publicationDate": new Date('04/15/15 02:30 PM'),
-        "percLi": "http://perc.li/HoJ0p"
+        "url": "http://perc.li/HoJ0p"
       },
       {
         "id": "3",
@@ -38,15 +38,99 @@ angular.module('crescendoBs')
         "type": "PDF",
         "author": "Karen Peña",
         "publicationDate": new Date('04/15/15 02:30 PM'),
-        "percLi": "http://perc.li/d3Dr4"
+        "url": "http://perc.li/d3Dr4"
       }
     ];
 
+    // TODO: get social accounts from Social Account API
+    $scope.socialAccounts = [
+      {
+        "id": "1",
+        "channel": "Facebook",
+        "name": "Karen Peña",
+        "handle": "karen.pena",
+        "avatarUrl": "http://"
+      },
+      {
+        "id": "2",
+        "channel": "Facebook",
+        "name": "Karen Peña",
+        "handle": "Nightime Solar",
+        "avatarUrl": "http://"
+      },
+      {
+        "id": "3",
+        "channel": "Twitter",
+        "name": "Karen Peña",
+        "handle": "kpena",
+        "avatarUrl": "http://"
+      },
+      {
+        "id": "4",
+        "channel": "Google",
+        "name": "Karen Peña",
+        "handle": "Nightime Solar",
+        "avatarUrl": "http://"
+      },
+      {
+        "id": "5",
+        "channel": "LinkedIn",
+        "name": "Karen Peña",
+        "handle": "Nightime Solar",
+        "avatarUrl": "http://"
+      }
+    ];
 
+    $scope.activeAccounts = [];
 
+    $scope.activeNetworks = {
+      "Facebook": 0,
+      "Twitter": 0,
+      "LinkedIn": 0,
+      "Google": 0
+    };
 
-
-
+    $scope.activeAccountChange = function(action, account){
+      if(action){
+        // Add account to active accounts
+        $scope.activeAccounts.push(account);
+        switch(account.channel) {
+          case 'Facebook':
+            $scope.activeNetworks.Facebook++;
+            break;
+          case 'Twitter':
+            $scope.activeNetworks.Twitter++;
+            break;
+          case 'LinkedIn':
+            $scope.activeNetworks.LinkedIn++;
+            break;
+          case 'Google':
+            $scope.activeNetworks.Google++;
+            break;
+        }
+      } else {
+        // Remove account from active accounts
+        angular.forEach($scope.activeAccounts, function(value, key){
+          if(value.id == account.id){
+            $scope.activeAccounts.splice(key, 1);
+            switch(account.channel) {
+              case 'Facebook':
+                $scope.activeNetworks.Facebook--;
+                break;
+              case 'Twitter':
+                $scope.activeNetworks.Twitter--;
+                break;
+              case 'LinkedIn':
+                $scope.activeNetworks.LinkedIn--;
+                break;
+              case 'Google':
+                $scope.activeNetworks.Google--;
+                break;
+            }
+          }
+        })
+      }
+    };
 
     // Function to increment state
     $scope.incrementState = function(){
@@ -59,43 +143,89 @@ angular.module('crescendoBs')
     };
 
     // Define Editor tabs and html partials
-    $scope.editorTabs = [
-      {
-        "title": "Twitter",
-        "template": "app/main/modal.socialposteditor.html"
+    $scope.editorTabs = {
+      "Facebook": {
+        "content": ""
       },
-      {
-        "title": "Facebook",
-        "template": "app/main/modal.socialposteditor.html"
+      "Twitter": {
+        "content": ""
       },
-      {
-        "title": "LinkedIn",
-        "template": "app/main/modal.socialposteditor.html"
+      "LinkedIn": {
+        "content": ""
       },
-      {
-        "title": "Google+",
-        "template": "app/main/modal.socialposteditor.html"
-      }
-    ];
+      "Google": {
+        "content": ""
+      },
+      activeTab: "Facebook"
+    };
 
     // Define preview tabs and html partials
-    $scope.previewTabs = [
-      {
-        "title": "Twitter",
-        "template": "app/main/modal.socialpostpreview.html"
+    $scope.previewTabs  = {
+      "Facebook": {
+        "content": ""
       },
-      {
-        "title": "Facebook",
-        "template": "app/main/modal.socialpostpreview.html"
+      "Twitter": {
+        "content": ""
       },
-      {
-        "title": "LinkedIn",
-        "template": "app/main/modal.socialpostpreview.html"
+      "LinkedIn": {
+        "content": ""
       },
-      {
-        "title": "Google+",
-        "template": "app/main/modal.socialpostpreview.html"
+      "Google": {
+        "content": ""
+      },
+      activeTab: "Facebook"
+    };
+
+
+
+    // Least expensive $watch function for state fixing
+    $scope.$watch('currentState', function(oldValue, newValue){
+      // Check to see what networks are available to set the
+      // first one as the active tab in the editor and the
+      // previewer tabs.
+      if(newValue == 2){
+        $scope.setActiveTab();
+        $scope.userHasEdited = true;
+
+        // Add the title and the minified URL to the body of
+        // the post messages.
+        if($scope.activeContent.item){
+          $scope.setContentForAll($scope.activeContent.item.title + ' ' + $scope.activeContent.item.url);
+        } else {
+          $scope.setContentForAll('');
+        }
       }
-    ];
+
+    });
+
+    $scope.setContentForAll = function(text){
+      $scope.editorTabs.Facebook.content = text;
+      $scope.editorTabs.Twitter.content = text;
+      $scope.editorTabs.LinkedIn.content = text;
+      $scope.editorTabs.Google.content = text;
+    };
+
+    $scope.setActiveTab = function(){
+      $scope.activeTabDefault = $scope.findActiveNetwork();
+
+      $scope.editorTabs.activeTab = $scope.activeTabDefault;
+      $scope.previewTabs.activeTab = $scope.activeTabDefault;
+    };
+
+    $scope.findActiveNetwork = function(){
+      if($scope.activeNetworks.Facebook > 0){
+        return "Facebook";
+      } else if($scope.activeNetworks.Twitter > 0){
+        return "Twitter";
+      } else if($scope.activeNetworks.LinkedIn > 0){
+        return "LinkedIn";
+      } else if($scope.activeNetworks.Google > 0){
+        return "Google";
+      } else {
+        return "Facebook";
+      }
+    }
+
+
 
   });
