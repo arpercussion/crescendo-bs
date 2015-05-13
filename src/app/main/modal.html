@@ -95,6 +95,9 @@
           <!-- INTRO TEXT -->
           <p class="lead">Select Social Media Accounts</p>
           <p>Select a social media account you would like to post to.</p>
+          <p ng-if="isNoAccountSelected" class="alert alert-warning">
+            <strong>Oops:</strong> Please select an account to continue.
+          </p>
           <!-- SOCIAL CHANNELS TABLE -->
           <table class="table table-striped">
             <thead>
@@ -177,6 +180,22 @@
             </li>
           </ul>
           <br/>
+          <!-- FACEBOOK TEXT -->
+          <div class="fade-in" ng-show="previewTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0">
+           <p ng-bind-html="editorTabs.Facebook.content | facebook"></p>
+          </div>
+          <!-- TWITTER TEXT -->
+          <div class="fade-in" max-chars="140" ng-show="previewTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0">
+            <p ng-bind-html="editorTabs.Twitter.content | twitter"></p>
+          </div>
+          <!-- LINKEDIN TEXT -->
+          <div class="fade-in" ng-show="previewTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0">
+            <p ng-bind-html="editorTabs.LinkedIn.content | linkedin"></p>
+          </div>
+          <!-- GOOGLE TEXT -->
+          <div class="fade-in" ng-show="previewTabs.activeTab == 'Google' && activeNetworks.Google !== 0">
+            <p ng-bind-html="editorTabs.Google.content | google"></p>
+          </div>
 
         </div>
         <!-- SCHEDULE VIEW -->
@@ -187,73 +206,53 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Networks</th>
-                <th></th>
+                <th width="25%">Date</th>
+                <th width="25%">Time</th>
+                <th width="40%">Networks</th>
+                <th width="10%"></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+
+              <tr ng-repeat="release in scheduledReleases">
                 <td>
-                  <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
+                  <input class="form-control" type="text" bs-datepicker="" date-format="fullDate" ng-model="release.dateTime" />
                 </td>
                 <td>
-                  <input class="form-control" type="text" bs-timepicker="" ng-model="event.time" />
+                  <input class="form-control" type="text" bs-timepicker="" ng-model="release.dateTime" />
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-default">
+
+                  <button ng-class="{ 'active': release.networks.Facebook == true }" class="btn btn-sm btn-default" ng-click="release.networks.Facebook = !release.networks.Facebook">
                     <i class="fa fa-facebook"></i>
                   </button>
-                  <button class="btn btn-sm btn-default">
+                  <button ng-class="{ 'active': release.networks.Twitter == true }" class="btn btn-sm btn-default" ng-click="release.networks.Twitter = !release.networks.Twitter">
                     <i class="fa fa-twitter"></i>
                   </button>
-                  <button class="btn btn-sm btn-default">
+                  <button ng-class="{ 'active': release.networks.Google == true }" class="btn btn-sm btn-default" ng-click="release.networks.Google = !release.networks.Google">
                     <i class="fa fa-google-plus"></i>
                   </button>
-                  <button class="btn btn-sm btn-default">
+                  <button ng-class="{ 'active': release.networks.LinkedIn == true }" class="btn btn-sm btn-default" ng-click="release.networks.LinkedIn = !release.networks.LinkedIn">
                     <i class="fa fa-linkedin"></i>
                   </button>
+
                 </td>
                 <td>
-                  <button class="btn btn-default btn-sm pull-right">
+                  <button class="btn btn-default btn-sm pull-right" ng-click="removeRelease($index)" ng-show="scheduledReleases.length > 1">
                     <i class="fa fa-trash-o"></i>
                   </button>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <input class="form-control" type="text" bs-datepicker="" ng-model="event.date" />
-                </td>
-                <td>
-                  <input class="form-control" type="text" bs-timepicker="" ng-model="event.time" />
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-default">
-                    <i class="fa fa-facebook"></i>
-                  </button>
-                  <button class="btn btn-sm btn-default">
-                    <i class="fa fa-twitter"></i>
-                  </button>
-                  <button class="btn btn-sm btn-default">
-                    <i class="fa fa-google-plus"></i>
-                  </button>
-                  <button class="btn btn-sm btn-default">
-                    <i class="fa fa-linkedin"></i>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-default btn-sm pull-right">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </td>
-              </tr>
+
             </tbody>
           </table>
           <!-- FINAL SUBMIT BUTTON -->
-          <form ng-submit="incrementState()" class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="incrementState()">Schedule your post</button>
-          </form>
+         <div class="text-center">
+           <button class="btn btn-default" ng-click="addScheduledRelease()">Add new release</button>
+           <button type="submit" class="btn btn-primary" ng-click="incrementState()">Schedule your post</button>
+         </div>
+
+
         </div>
         <!-- SUCCESS/ERROR VIEW -->
         <div class="amp-view text-center" ng-if="currentState == 6">
@@ -266,7 +265,7 @@
         <div class="row">
           <!-- BACK BUTTON -->
           <div class="col-xs-4">
-            <button ng-show="currentState >= 1" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
+            <button ng-show="currentState >= 1 && currentState <= 5" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
           </div>
           <!-- PROGRESS BULLETS -->
           <div class="col-xs-4">

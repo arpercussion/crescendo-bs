@@ -3,7 +3,7 @@ angular.module('crescendoBs')
     "use strict";
 
     // Current view of Amplify Modal
-    $scope.currentState = 0;
+    $scope.currentState = 5;
     // Selected piece of content to amplify
     $scope.activeContent = {
       "item": ""
@@ -176,6 +176,48 @@ angular.module('crescendoBs')
       activeTab: "Facebook"
     };
 
+    $scope.scheduledReleases = [
+      {
+        "id": "1",
+        "date": "1",
+        "time": "1",
+        "dateTime": new Date(),
+        "networks": {
+          "Facebook": false,
+          "Twitter": false,
+          "LinkedIn": false,
+          "Google": false
+        }
+      }
+    ];
+
+    //console.log();
+
+    $scope.addScheduledRelease = function(){
+      var newRelease = {
+        "id": "1",
+        "date": "1",
+        "time": "1",
+        "dateTime": new Date(),
+        "networks": {
+          "Facebook": false,
+          "Twitter": false,
+          "LinkedIn": false,
+          "Google": false
+        }
+      };
+      $scope.scheduledReleases.push(newRelease);
+    };
+
+    $scope.removeRelease = function(index){
+      $scope.scheduledReleases.splice(index, 1);
+    };
+
+
+
+
+
+
 
 
     // Least expensive $watch function for state fixing
@@ -214,18 +256,25 @@ angular.module('crescendoBs')
 
     $scope.findActiveNetwork = function(){
       if($scope.activeNetworks.Facebook > 0){
+        $scope.isNoAccountSelected = false;
         return "Facebook";
       } else if($scope.activeNetworks.Twitter > 0){
+        $scope.isNoAccountSelected = false;
         return "Twitter";
       } else if($scope.activeNetworks.LinkedIn > 0){
+        $scope.isNoAccountSelected = false;
         return "LinkedIn";
       } else if($scope.activeNetworks.Google > 0){
+        $scope.isNoAccountSelected = false;
         return "Google";
       } else {
+        // Prevent the user from having zero selected networks.
+        $scope.currentState = 2;
+        $scope.isNoAccountSelected = true;
+
         return "Facebook";
       }
     }
-
 
 
   });

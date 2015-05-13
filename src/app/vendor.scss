@@ -1,4 +1,4 @@
-$icon-font-path: "../../bower_components/font-awesome/fonts/";
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 $bootstrap-sass-asset-helper: false !default;
 //
@@ -134,9 +134,9 @@ $headings-color:          inherit !default;
 $icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../fonts/bootstrap/") !default;
 
 //** File name for all font files.
-$icon-font-name:          "fontawesome-webfont" !default;
+$icon-font-name:          "glyphicons-halflings-regular" !default;
 //** Element ID within SVG icon file.
-$icon-font-svg-id:        "fontawesome-webfont" !default;
+$icon-font-svg-id:        "glyphicons-halflings-regular" !default;
 
 
 //== Components
