@@ -1436,7 +1436,6 @@ option, select{
       float: left;
       background-color: white;
       color: black;
-      //padding: 0 1em;
       width: 561px;
       box-shadow: 2px 2px 2px rgba(0,0,0,.25);
 
@@ -1451,8 +1450,6 @@ option, select{
           color: $grey-dove;
           font-size: .8em;
         }
-
-
       }
 
       p{
@@ -1470,7 +1467,7 @@ option, select{
         padding-bottom: 2em;
       }
 
-      ul{
+      ul {
         padding: 0 1em;
         color: $grey-dove;
 
@@ -1478,11 +1475,7 @@ option, select{
           padding-right: 0;
         }
       }
-
-
     }
-
-
   }
 
 }
@@ -1521,4 +1514,40 @@ option, select{
       min-width: 100%;
     }
   }
+}
+
+.schedule{
+  label{
+    color: white;
+  }
+
+  .schedule-table{
+    padding: 1em;
+    background-color: white;
+    border-radius: .5em;
+    color: $grey-dove-dark;
+    height: 380px;
+    overflow: scroll;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.25);
+  }
+
+
+
+
+
+}
+.schedule .list-group{
+  a{
+    border-color: lighten($grey-dove, 20%);
+    color: $grey-dove-dark;
+  }
+  a.active{
+    color: $grey-dove-dark;
+    background-color: white;
+    border-color: lighten($grey-dove, 20%);
+  }
+  .fa-check{
+    color: $cut-grass;
+  }
+
 }

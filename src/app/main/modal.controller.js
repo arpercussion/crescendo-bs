@@ -15,6 +15,20 @@ angular.module('crescendoBs')
     // Date for preview
     $scope.currentTime = new Date();
 
+    // Collection of scheduled releases
+    $scope.scheduledReleases = [];
+
+    // Single instance of scheduled release
+    $scope.deployementEvent = {
+      dateTime: new Date(),
+      networks:{
+        "Facebook": false,
+        "Twitter": false,
+        "LinkedIn": false,
+        "Google": false
+      }
+    };
+
     // TODO: pull contents from Content API
     $scope.contents = [
       {
@@ -88,7 +102,7 @@ angular.module('crescendoBs')
       "Facebook": 0,
       "Twitter": 0,
       "LinkedIn": 0,
-      "Google": 1
+      "Google": 0
     };
 
     $scope.activeAccountChange = function(action, account){
@@ -177,32 +191,26 @@ angular.module('crescendoBs')
       activeTab: "Facebook"
     };
 
-    $scope.scheduledReleases = [
-      {
-        "id": "1",
-        "dateTime": new Date(),
-        "networks": {
-          "Facebook": false,
-          "Twitter": false,
-          "LinkedIn": false,
-          "Google": false
-        }
-      }
-    ];
 
-    $scope.addScheduledRelease = function(){
-      var newRelease = {
-        "id": "1",
-        "dateTime": new Date(),
-        "networks": {
-          "Facebook": false,
-          "Twitter": false,
-          "LinkedIn": false,
-          "Google": false
-        }
-      };
-      $scope.scheduledReleases.push(newRelease);
+
+    $scope.addScheduledRelease = function(timestamp, networks){
+      if(timestamp && networks){
+        var newRelease = {
+          "id": "1",
+          "dateTime": timestamp,
+          "networks": {
+            "Facebook": networks.Facebook,
+            "Twitter": networks.Twitter,
+            "LinkedIn": networks.LinkedIn,
+            "Google": networks.Google
+          }
+        };
+        $scope.scheduledReleases.push(newRelease);
+
+      }
     };
+
+
 
     $scope.removeRelease = function(index){
       $scope.scheduledReleases.splice(index, 1);
