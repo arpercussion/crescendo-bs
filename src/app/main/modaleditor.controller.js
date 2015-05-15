@@ -2,6 +2,7 @@ angular.module('crescendoBs')
   .controller('ModalEditorCtrl', function($scope){
     $scope.limit = $scope.maxChars;
 
+
     // TODO: Bind to Hashtag API
     $scope.hashtags = [
       {

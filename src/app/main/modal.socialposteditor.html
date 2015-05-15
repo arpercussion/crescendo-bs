@@ -1,4 +1,4 @@
-<div>
+<div class="editor">
   <div class="row">
     <div class="col-xs-4">
       <select name="hashtags" id="hashtags" class="form-control" ng-model="activeHashtag"
@@ -22,21 +22,36 @@
     </div>
     <div class="clear-fix">&nbsp;</div>
     <div class="col-xs-12">
-      <textarea class="form-control" name="postData" id="social-post" ng-model="postText" ng-trim="false" cols="30" rows="7"></textarea>
+      <textarea class="form-control" name="postData" id="social-post" ng-model="postText" ng-trim="false" cols="30" rows="8"></textarea>
     </div>
     <div class="clear-fix">&nbsp;</div>
-    <div class="col-xs-2">
+    <div class="col-xs-6">
+      <!--
       <p class="text-muted">
         <small>Attached image:</small>
       </p>
-    </div>
-    <div class="col-xs-4">
-      <img ng-if="activeImg" style="max-height: 50px; max-width: 50px;" ng-src="{{ activeImg }}" alt="" class="img-responsive img-rounded"/>
-      <p class="text-muted" ng-if="!activeImg"><em><small>None.</small></em></p>
+      -->
+      <!--<p class="text-muted" ng-if="!activeImg"><em><small>None.</small></em></p>-->
+
+      <div class="attached-image">
+
+        <i ng-if="!activeImg" class="fa fa-image"></i>
+
+        <img ng-if="activeImg" ng-src="{{ activeImg }}" alt="" class="img-responsive img-rounded"/>
+
+        <span ng-if="activeImg"> &nbsp; {{ activeImg }}</span>
+
+        <span ng-if="!activeImg">No Image Attached</span>
+
+        <a href="#/" class="pull-right" ng-if="activeImg" ng-click="addImage()">
+          <i class="fa fa-times"></i>
+        </a>
+      </div>
+
     </div>
     <div class="col-xs-6">
-      <p ng-show="maxChars" id="max-chars" class="pull-right" ng-class="{ 'text-muted': postText.length <= limit, 'text-primary': postText.length > limit }">
-        <small>Characters: {{ postText.length }} / {{ limit }}</small>
+      <p ng-show="maxChars" id="max-chars" class="pull-right alert" ng-class="{ 'text-muted': postText.length <= limit, 'alert-danger': postText.length > limit }">
+        <small><strong>{{ postText.length }}</strong> / {{ limit }}</small>
       </p>
     </div>
   </div>

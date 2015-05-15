@@ -67,7 +67,10 @@ $brand-danger:          $vermillion-dark !default;
 
 $gray-lighter:           lighten($gray-base, 93.5%) !default;
 
-
+$fb-blue:             #3b5998;
+$tw-blue:             #00aced;
+$li-blue:             #007bb6;
+$gp-red:              #dd4b39;
 
 
 
@@ -921,6 +924,10 @@ $hr-border:                   $gray-lighter !default;
 
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 
+a{
+  cursor: pointer;
+}
+
 // Square corners
 .sq{
 	border-radius: 0;
@@ -976,36 +983,92 @@ a:hover, a:focus{
 
 .nav-tabs {
   margin-bottom: 1em;
+
+  li > a{
+    border-radius: 0;
+  }
 }
 
-.nav-tabs > li > a{
-  border-radius: 0;
-}
 
+.editor{
+  background-color: rgba(255, 255, 255, 1);
+  height: 320px;
+  overflow: scroll;
+  padding: 1em;
+  border-radius: .5em;
+  box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+}
 
 .nav-underlined{
-  border-bottom: solid thin $grey-dove;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: .5em;
+  overflow: hidden;
+  li {
+    float: left;
+
+    a {
+      color: rgba(255, 255, 255, 0.5);
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      -webkit-transition: background-color .25s;
+      -moz-transition: background-color .25s;
+      -ms-transition: background-color .25s;
+      -o-transition: background-color .25s;
+      transition: background-color .25s;
+    };
+
+
+    a:hover{
+      background-color: rgba(255, 255, 255, .2);
+
+    }
+  }
+
+  li.active > a{
+    color: $brand-primary;
+    background-color: white;
+  }
 }
 
-.nav-underlined > li{
-  float: left;
-}
-.nav-underlined > li > a{
-  color: $grey-dove;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+.attached-image{
+  width: 100%;
+  padding: 0 1em;
+  background: lighten($grey-dove-dark, 40%);
+  border: solid thin lighten($grey-dove-dark, 30%);
+  color: $grey-dove-dark;
+  border-radius: .5em;
 
-.nav-underlined > li.active > a{
-  color: $brand-primary;
-}
-.nav-underlined > .active{
-  border-bottom: solid 2px $brand-primary;
-  top: 1px;
+  height: 50px;
+
+  .fa-image{
+    margin: 1.25em 1em 0 0;
+    float: left;
+  }
+
+  img{
+    max-height: 30px;
+    max-width: 40px;
+    border-radius: 10px;
+    float: left;
+    margin-top: .75em;
+  }
+
+  span{
+    padding-top: 1em;
+    display: block;
+    float: left;
+  }
+
+  a{
+    padding-top: 1em;
+    color: $grey-dove-dark;
+  }
+
+
 }
 
 
@@ -1096,6 +1159,20 @@ option, select{
 .amp-help{
   height: 400px;
   overflow: scroll;
+
+  .fa-facebook{
+    color: $fb-blue;
+  }
+  .fa-twitter{
+    color: $tw-blue;
+  }
+  .fa-linkedin{
+    color: $li-blue;
+  }
+  .fa-google-plus{
+    color: $gp-red;
+  }
+
 }
 
 .amp-view.ng-enter{
@@ -1132,4 +1209,316 @@ option, select{
   animation: fadeIn .5s;
 }
 
+.primary {
+  .modal-header {
+    border-bottom: none;
+  }
 
+  .modal-content, .modal-body {
+    background: $brand-primary;
+    border: none;
+    color: white;
+  }
+  .modal-body {
+
+  }
+  .modal-footer {
+    background: white;
+    color: $grey-dove-dark;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .close {
+    color: white;
+  }
+}
+
+.text-silent{
+  padding-top: .5em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  color: lighten($brand-primary, 35%);
+}
+.file-container{
+  color: $grey-dove-dark;
+  background: white;
+  display: block;
+  border-radius: .25em;
+  overflow: hidden;
+  box-shadow: 0px 5px 5px rgba(0,0,0,0.25);
+
+  .files{
+
+    height: 330px;
+    overflow: scroll;
+    padding: 1em;
+
+    .media.active{
+      background: lighten($brand-primary, 40%);
+      border-color: lighten($brand-primary, 30%);
+
+    };
+
+    .media:hover{
+      background: lighten($brand-primary, 40%);
+    }
+
+    .media{
+      cursor: pointer;
+      padding-top: 1em;
+      padding-bottom: 2em;
+      border-radius: .5em;
+      border: solid thin white;
+
+      -webkit-transition: background-color .25s;
+      -moz-transition: background-color .25s;
+      -ms-transition: background-color .25s;
+      -o-transition: background-color .25s;
+      transition: background-color .25s;
+
+      .media-left{
+        min-width: 75px;
+        text-align: center;
+        color: lighten($brand-primary, 20%);
+      };
+    };
+  };
+
+  .filters{
+    background-color: lighten($brand-primary, 40%);
+    width: 100%;
+    padding-top: 1em;
+    height: 60px;
+    border-bottom: solid thin lighten($brand-primary, 30%);
+    //z-index: 999;
+    //box-shadow: 0px 2px 2px rgba(0,0,0,0.10);
+
+    ul > li {
+      padding-top: .5em;
+      color: lighten($brand-primary, 10%);
+    };
+
+    ul > li.active {
+      font-weight: bold;
+    };
+  };
+}
+
+.post-preview {
+  background-color: white;
+  color: $grey-dove-dark;
+  //padding: 1em;
+  border-radius: .5em;
+  overflow: scroll;
+  height: 320px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+
+
+  .fa{
+    color: white;
+    text-align: center;
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  .card{
+    background-color: white;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  }
+
+
+
+}
+
+
+.post-preview.fb{
+  background-color: $fb-blue;
+  padding: 2em;
+  .card{
+    padding: 1em;
+    color: black;
+    width: 496px;
+    margin: auto;
+
+    .user-name{
+      margin-left: 1em;
+      color: $fb-blue;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .timestamp{
+      margin-left: 1em;
+      color: $grey-dove;
+      font-size: .9em;
+    }
+
+    .avatar{
+      width: 50px;
+      float: left;
+      margin-bottom: 1em;
+    }
+
+    .post-image{
+      margin-top: 1em;
+      margin-bottom: 1em;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+    ul{
+      font-size: .9em;
+      li{
+        color: $fb-blue;
+        padding-right: 0;
+      }
+    }
+
+    a{
+      color: $fb-blue;
+    }
+  }
+
+}
+
+
+.post-preview.tw{
+  background-color: $tw-blue;
+  padding: 2em;
+  .card{
+    width: 588px;
+    margin: auto;
+    padding: 1em 1em 0;
+    color: black;
+    border-radius: .5em;
+    .avatar-container{
+      float: left;
+      width: 12%;
+      .avatar{
+        width: 50px;
+        border-radius: 5px;
+      }
+    }
+    .content{
+      float: left;
+      width: 88%;
+      .post-image{
+        margin: 1em 0 0;
+        max-width: 100%;
+        border-radius: .5em;
+      }
+      .user-name{
+        font-size: 1.1em;
+        .text-muted{
+          color: $grey-dove;
+          font-size: .9em;
+        }
+      }
+      a{
+        color: $grey-dove-dark;
+      }
+
+    }
+  }
+}
+.post-preview.li{
+  background-color: $li-blue;
+  padding: 2em;
+  .card{
+    width: 646px;
+    margin: auto;
+    .avatar{
+      float: left;
+      width: 80px;
+      margin-right: 5px;
+    }
+    .content{
+      float: left;
+      background-color: white;
+      color: black;
+      //padding: 0 1em;
+      width: 561px;
+      box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+
+      .user-name{
+        border-bottom: solid thin lighten($grey-dove, 25%);
+        width: 100%;
+        display: block;
+        padding: 1em;
+        color: $li-blue;
+
+        .pull-right{
+          color: $grey-dove;
+          font-size: .8em;
+        }
+
+
+      }
+
+      p{
+        padding: 1em;
+      }
+
+      a{
+        color: $li-blue;
+      }
+
+      .post-image{
+        max-width: 95%;
+        min-width: 95%;
+        margin: 0 2.5% 0;
+        padding-bottom: 2em;
+      }
+
+      ul{
+        padding: 0 1em;
+        color: $grey-dove;
+
+        li {
+          padding-right: 0;
+        }
+      }
+
+
+    }
+
+
+  }
+
+}
+.post-preview.gp{
+  background-color: $gp-red;
+  padding: 2em;
+
+  .card{
+    width: 438px;
+    margin: auto;
+
+    padding: 1em;
+    color: black;
+    .user-name{
+      float: left;
+    }
+
+    .timestamp{
+      margin-top: .5em;
+      float: left;
+      font-size: .8em;
+      color: lighten($grey-dove, 10%);
+    }
+
+    .avatar{
+      width: 50px;
+      border-radius: 50px;
+      float: left;
+      margin-bottom: 1em;
+      margin-right: 2em;
+    }
+
+    .post-image{
+      padding-top: 2em;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+}

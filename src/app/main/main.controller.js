@@ -7,7 +7,9 @@ angular.module('crescendoBs')
     $scope.amplifyModal = $modal({
       template: 'app/main/modal.html',
       show: true,
-      placement: 'center'
+      placement: 'center',
+      keyboard: false,
+      backdrop: 'static'
     });
     // Function to show modal
     $scope.showModal = function() {

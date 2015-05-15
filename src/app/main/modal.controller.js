@@ -3,7 +3,7 @@ angular.module('crescendoBs')
     "use strict";
 
     // Current view of Amplify Modal
-    $scope.currentState = 5;
+    $scope.currentState = 0;
     // Selected piece of content to amplify
     $scope.activeContent = {
       "item": ""
@@ -12,7 +12,8 @@ angular.module('crescendoBs')
     $scope.editorTabsActiveTab = 0;
     // Active Preview tab
     $scope.previewTabsActiveTab = 0;
-
+    // Date for preview
+    $scope.currentTime = new Date();
 
     // TODO: pull contents from Content API
     $scope.contents = [
@@ -49,35 +50,35 @@ angular.module('crescendoBs')
         "channel": "Facebook",
         "name": "Karen Peña",
         "handle": "karen.pena",
-        "avatarUrl": "http://"
+        "avatarUrl": "http://goo.gl/EFDcA2"
       },
       {
         "id": "2",
         "channel": "Facebook",
         "name": "Karen Peña",
         "handle": "Nightime Solar",
-        "avatarUrl": "http://"
+        "avatarUrl": "http://goo.gl/HDP0Rk"
       },
       {
         "id": "3",
         "channel": "Twitter",
         "name": "Karen Peña",
         "handle": "kpena",
-        "avatarUrl": "http://"
+        "avatarUrl": "http://goo.gl/ozR3mQ"
       },
       {
         "id": "4",
         "channel": "Google",
         "name": "Karen Peña",
         "handle": "Nightime Solar",
-        "avatarUrl": "http://"
+        "avatarUrl": "http://goo.gl/PNoGgd"
       },
       {
         "id": "5",
         "channel": "LinkedIn",
         "name": "Karen Peña",
         "handle": "Nightime Solar",
-        "avatarUrl": "http://"
+        "avatarUrl": "http://goo.gl/tycz5Y"
       }
     ];
 
@@ -87,7 +88,7 @@ angular.module('crescendoBs')
       "Facebook": 0,
       "Twitter": 0,
       "LinkedIn": 0,
-      "Google": 0
+      "Google": 1
     };
 
     $scope.activeAccountChange = function(action, account){
@@ -145,16 +146,20 @@ angular.module('crescendoBs')
     // Define Editor tabs and html partials
     $scope.editorTabs = {
       "Facebook": {
-        "content": ""
+        "content": "",
+        "image": ""
       },
       "Twitter": {
-        "content": ""
+        "content": "",
+        "image": ""
       },
       "LinkedIn": {
-        "content": ""
+        "content": "",
+        "image": ""
       },
       "Google": {
-        "content": ""
+        "content": "",
+        "image": ""
       },
       activeTab: "Facebook"
     };
@@ -162,16 +167,12 @@ angular.module('crescendoBs')
     // Define preview tabs and html partials
     $scope.previewTabs  = {
       "Facebook": {
-        "content": ""
       },
       "Twitter": {
-        "content": ""
       },
       "LinkedIn": {
-        "content": ""
       },
       "Google": {
-        "content": ""
       },
       activeTab: "Facebook"
     };
@@ -179,8 +180,6 @@ angular.module('crescendoBs')
     $scope.scheduledReleases = [
       {
         "id": "1",
-        "date": "1",
-        "time": "1",
         "dateTime": new Date(),
         "networks": {
           "Facebook": false,
@@ -191,13 +190,9 @@ angular.module('crescendoBs')
       }
     ];
 
-    //console.log();
-
     $scope.addScheduledRelease = function(){
       var newRelease = {
         "id": "1",
-        "date": "1",
-        "time": "1",
         "dateTime": new Date(),
         "networks": {
           "Facebook": false,
@@ -214,18 +209,13 @@ angular.module('crescendoBs')
     };
 
 
-
-
-
-
-
-
     // Least expensive $watch function for state fixing
-    $scope.$watch('currentState', function(oldValue, newValue){
+    $scope.$watch('currentState', function(newValue, oldValue){
       // Check to see what networks are available to set the
       // first one as the active tab in the editor and the
       // previewer tabs.
-      if(newValue == 2){
+
+      if(newValue == 3){
         $scope.setActiveTab();
         $scope.userHasEdited = true;
 
@@ -237,6 +227,7 @@ angular.module('crescendoBs')
           $scope.setContentForAll('');
         }
       }
+
 
     });
 

@@ -1,136 +1,141 @@
-<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-ng-controller="AmplifyCtrl">
+<div class="modal primary" tabindex="-1" role="dialog" aria-hidden="true" data-ng-controller="AmplifyCtrl">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <!-- EXIT BUTTON -->
       <div class="modal-header">
+        <!-- CLOSE BUTTON -->
         <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <!-- INTRO TEXT -->
+        <h2 ng-if="currentState == 1">Select a piece of content to amplify.</h2>
+        <h2 ng-if="currentState == 2">Select Social Media Accounts.</h2>
+        <h2 ng-if="currentState == 3">Compose your message.</h2>
+        <h2 ng-if="currentState == 4">Preview your posts.</h2>
+
       </div>
       <!-- MODAL CONTENT -->
       <div class="modal-body">
         <!-- HELP VIEW -->
         <div ng-if="currentState == 0" class="text-center amp-help">
-          <h1>Let's amplify.</h1>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <div class="row">
+          <br/><br/><br/><br/>
+          <h1 class="text-center">Let's Amplify Your Content</h1>
+          <br/><br/>
+          <div class="row text-center">
             <div></div>
             <div class="col-xs-3 help-tip-1">
-              <p class="lead text-muted">First</p>
+              <p class="lead">First</p>
               <p>1. Select a document to promote. Or not...</p>
             </div>
             <div class="col-xs-3 help-tip-2">
-              <p class="lead text-muted">Second</p>
+              <p class="lead">Second</p>
               <p>2. Select your social accounts.</p>
             </div>
             <div class="col-xs-3 help-tip-3">
-              <p class="lead text-muted">Third</p>
+              <p class="lead">Third</p>
               <p>3. Author your message.</p>
             </div>
             <div class="col-xs-3 help-tip-4">
-              <p class="lead text-muted">Fourth</p>
+              <p class="lead">Fourth</p>
               <p>4. Schedule your amp.</p>
             </div>
           </div>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <button data-ng-click="incrementState()" class="btn btn-primary btn-lg">Get Started</button>
+          <br/><br/><br/><br/>
         </div>
         <!-- SELECT CONTENT VIEW -->
         <div class="amp-view" ng-if="currentState == 1">
-          <!-- INTRO TEXT -->
-          <h4>Select a piece of content to amplify.</h4>
-          <p><small>If you want to amplify a particular piece of content, select one to continue.</small></p>
-          <p class="alert alert-warning" ng-if="userHasEdited">
-            <strong>Warning: </strong>Changing your content will delete your current post.
-          </p>
-          <!-- CONTENT TABLE -->
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th></th>
-              <th>Type</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Publication Date</th>
-            </tr>
-            </thead>
-            <tbody>
-              <!-- CONTENT ROW REPEATER -->
-              <tr ng-repeat="content in contents">
-                <td>
-                  <input type="radio" name="content" ng-value="content" ng-model="activeContent.item" />
-                </td>
-                <td>
-                  {{ content.type }}
-                </td>
-                <td>
-                  {{ content.title }}
-                </td>
-                <td>
-                  {{ content.author }}
-                </td>
-                <td>
-                  {{ content.publicationDate | date:'medium' }}
-                </td>
-              </tr>
-              <!-- SELECT NONE ROW -->
-              <tr>
-                <td><input type="radio" value="" ng-model="activeContent.item" /></td>
-                <td></td>
-                <td><em class="text-muted">No content</em></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-xs-12">
+            <!-- FILE CONTAINER -->
+            <div class="file-container">
+              <!-- FILTERS & SEARCH CONTAINER -->
+              <div class="filters">
+                <!-- FILTERS CONTAINER -->
+                <div class="col-xs-8">
+                  <!-- FILTERS -->
+                  <ul class="list-inline">
+                    <li class="active"><a href="#/">All</a></li>
+                    <li><a href="#/">Blogs</a></li>
+                    <li><a href="#/">Files</a></li>
+                  </ul>
+                </div>
+                <!-- SEARCH CONTAINER -->
+                <div class="col-xs-4">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." />
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                      </span>
+                  </div>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+              </div>
+              <div class="files">
+                <!-- CHANGING CONTENT NOTIFICATION -->
+                <p class="alert alert-warning" ng-if="userHasEdited">
+                  <strong>Warning: </strong>Changing your content will delete your current post.
+                </p>
+                <!-- NO CONTENT ROW -->
+                <div ng-class="{ 'active' : !activeContent.item.id }" class="media" ng-click="activeContent.item = {}">
+                  <div class="media-left">
+                    <i class="fa fa-2x fa-ban"></i>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">No content.</h4>
+                    If you don't want to amplify a piece of content, we won't make you. Selecting this option allows you to post whatever you want to whatever networks your have configured.
+                  </div>
+                </div>
+                <!-- CONTENT REPEATER -->
+                <div ng-class="{ 'active' : activeContent.item.id == content.id }" class="media" ng-repeat="content in contents" ng-click="activeContent.item = content">
+                  <div class="media-left">
+                    <i class="fa fa-2x fa-file-o" ng-if="content.type == 'Blog'"></i>
+                    <i class="fa fa-2x fa-file-pdf-o" ng-if="content.type == 'PDF'"></i>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{ content.title }}</h4>
+                    {{ content.author }} <br/>
+                    {{ content.publicationDate | date:'medium' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- SELECT SOCIAL CHANNELS VIEW -->
         <div class="amp-view" ng-if="currentState == 2">
-          <!-- INTRO TEXT -->
-          <p class="lead">Select Social Media Accounts</p>
-          <p>Select a social media account you would like to post to.</p>
+
           <p ng-if="isNoAccountSelected" class="alert alert-warning">
-            <strong>Oops:</strong> Please select an account to continue.
+            <strong>Oops:</strong> Please select at least one account to continue.
           </p>
-          <!-- SOCIAL CHANNELS TABLE -->
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Type</th>
-                <th>Handle</th>
-                <th>Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- SOCIAL ACCOUNT REPEATER -->
-              <tr ng-repeat="account in socialAccounts">
-                <td><input type="checkbox" ng-model="account.isActive" ng-change="activeAccountChange(account.isActive, account)" value="0" /></td>
-                <td>
-                  <i class="fa fa-facebook" ng-if="account.channel == 'Facebook'"></i>
-                  <i class="fa fa-twitter" ng-if="account.channel == 'Twitter'"></i>
-                  <i class="fa fa-google-plus" ng-if="account.channel == 'Google'"></i>
-                  <i class="fa fa-linkedin" ng-if="account.channel == 'LinkedIn'"></i>
-                </td>
-                <td>{{ account.handle }}</td>
-                <td>{{ account.name }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <!--<pre>{{ activeNetworks | json }}</pre>-->
+
+          <div class="col-xs-12">
+            <div class="list-group">
+              <a ng-click="account.isActive = !account.isActive; activeAccountChange(account.isActive, account)" ng-repeat="account in socialAccounts" class="list-group-item">
+
+                <i class="fa fa-facebook" ng-if="account.channel == 'Facebook'"></i>
+                <i class="fa fa-twitter" ng-if="account.channel == 'Twitter'"></i>
+                <i class="fa fa-google-plus" ng-if="account.channel == 'Google'"></i>
+                <i class="fa fa-linkedin" ng-if="account.channel == 'LinkedIn'"></i>
+
+                &nbsp; &nbsp;
+
+                <img ng-src="{{ account.avatarUrl }}" style="width: 25px; height: 25px; border-radius: 15px;" alt="{{ account.name }}" />
+
+                &nbsp &nbsp;
+
+                {{ account.name }} <span class="text-muted">{{ account.handle }}</span>
+                <span ng-show="account.isActive == true" class="text-success pull-right"><i class="fa fa-check"></i></span>
+              </a>
+            </div>
+
+          </div>
+
+
+
+
+
         </div>
         <!-- EDIT POST VIEW -->
         <div class="amp-view" ng-if="currentState == 3">
-          <!-- INTRO TEXT -->
-          <p class="lead">Compose a message</p>
+
           <!-- EDITOR TABS -->
-          <!--  nav-justified -->
           <ul class="nav nav-underlined">
             <li ng-class="{ 'active': editorTabs.activeTab == 'Facebook' }" ng-if="activeNetworks.Facebook !== 0">
               <a ng-click=" editorTabs.activeTab = 'Facebook' ">Facebook</a>
@@ -147,23 +152,18 @@
           </ul>
           <br/>
           <!-- FACEBOOK TEXT -->
-          <modal-editor  class="fade-in" ng-show="editorTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0" post-text="editorTabs.Facebook.content"></modal-editor>
+          <modal-editor  class="fade-in" ng-show="editorTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0" post-text="editorTabs.Facebook.content" active-img="editorTabs.Facebook.image"></modal-editor>
           <!-- TWITTER TEXT -->
-          <modal-editor class="fade-in" max-chars="140" ng-show="editorTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0" post-text="editorTabs.Twitter.content"></modal-editor>
+          <modal-editor class="fade-in" max-chars="140" ng-show="editorTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0" post-text="editorTabs.Twitter.content" active-img="editorTabs.Twitter.image"></modal-editor>
           <!-- LINKEDIN TEXT -->
-          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0" post-text="editorTabs.LinkedIn.content"></modal-editor>
+          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0" post-text="editorTabs.LinkedIn.content" active-img="editorTabs.LinkedIn.image"></modal-editor>
           <!-- GOOGLE TEXT -->
-          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'Google' && activeNetworks.Google !== 0" post-text="editorTabs.Google.content"></modal-editor>
+          <modal-editor class="fade-in" ng-show="editorTabs.activeTab == 'Google' && activeNetworks.Google !== 0" post-text="editorTabs.Google.content" active-img="editorTabs.Google.image"></modal-editor>
 
-          <p ng-if="activeNetworks.Facebook == 0 && activeNetworks.Twitter == 0 && activeNetworks.LinkedIn == 0 && activeNetworks.Google == 0" class="text-muted text-center">
-            <em>Please select a sending account to continue.</em>
-          </p>
 
         </div>
         <!-- PREVIEW POST VIEW -->
         <div class="amp-view" ng-if="currentState == 4">
-          <!-- INTRO TEXT -->
-          <p class="lead">Preview your posts.</p>
           <!-- PREVIEW TABS -->
           <ul class="nav nav-underlined">
             <li ng-class="{ 'active': previewTabs.activeTab == 'Facebook' }" ng-if="activeNetworks.Facebook !== 0">
@@ -181,20 +181,75 @@
           </ul>
           <br/>
           <!-- FACEBOOK TEXT -->
-          <div class="fade-in" ng-show="previewTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0">
-           <p ng-bind-html="editorTabs.Facebook.content | facebook"></p>
+          <div class="fade-in post-preview fb" ng-show="previewTabs.activeTab == 'Facebook' && activeNetworks.Facebook !== 0">
+            <i class="fa fa-facebook"></i>
+            <div class="card">
+              <img class="avatar" src="/assets/images/default_fb.jpg" alt="Facebook Avatar" />
+              <span class="user-name">John Smith</span> <br/>
+              <span class="timestamp">{{ currentTime | date:'MMM d \'at \' h:mm a' }}</span>
+              <div class="clearfix">&nbsp;</div>
+
+              <p ng-bind-html="editorTabs.Facebook.content | facebook"></p>
+
+              <img class="post-image" ng-if="editorTabs.Facebook.image" ng-src="{{ editorTabs.Facebook.image }}" alt="{{ editorTabs.Facebook.image }}" />
+
+              <ul class="list-inline">
+                <li><a>Like</a></li>
+                <li>•</li>
+                <li><a>Comment</a></li>
+                <li>•</li>
+                <li><a>Share</a></li>
+              </ul>
+           </div>
           </div>
           <!-- TWITTER TEXT -->
-          <div class="fade-in" max-chars="140" ng-show="previewTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0">
-            <p ng-bind-html="editorTabs.Twitter.content | twitter"></p>
+          <div class="fade-in post-preview tw" max-chars="140" ng-show="previewTabs.activeTab == 'Twitter' && activeNetworks.Twitter !== 0">
+            <i class="fa fa-twitter"></i>
+            <div class="card">
+              <div class="avatar-container">
+                <img class="avatar" src="/assets/images/default_tw.jpg" alt="Twitter Avatar" />
+              </div>
+              <div class="content">
+                <span class="user-name"><strong>John Smith</strong> <span class="text-muted">@johnsmith • now</span></span>
+                <br/>
+                <span ng-bind-html="editorTabs.Twitter.content | twitter"></span>
+                <img class="post-image" ng-if="editorTabs.Twitter.image" ng-src="{{ editorTabs.Twitter.image }}" alt="{{ editorTabs.Twitter.image }}" />
+              </div>
+              <div class="clearfix">&nbsp;</div>
+            </div>
           </div>
           <!-- LINKEDIN TEXT -->
-          <div class="fade-in" ng-show="previewTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0">
-            <p ng-bind-html="editorTabs.LinkedIn.content | linkedin"></p>
+          <div class="fade-in post-preview li" ng-show="previewTabs.activeTab == 'LinkedIn' && activeNetworks.LinkedIn !== 0">
+            <i class="fa fa-linkedin"></i>
+            <div class="card">
+              <img class="avatar" src="/assets/images/default_li.gif" alt="Twitter Avatar" />
+              <div class="content">
+                <strong class="user-name">John Smith <span class="pull-right">1m</span></strong>
+                <p ng-bind-html="editorTabs.LinkedIn.content | linkedin"></p>
+                <img class="post-image" ng-if="editorTabs.LinkedIn.image" ng-src="{{ editorTabs.LinkedIn.image }}" alt="{{ editorTabs.LinkedIn.image }}" />
+                <ul class="list-inline">
+                  <li><a>Like</a></li>
+                  <li>•</li>
+                  <li><a>Comment</a></li>
+                  <li>•</li>
+                  <li><a>Share</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
           <!-- GOOGLE TEXT -->
-          <div class="fade-in" ng-show="previewTabs.activeTab == 'Google' && activeNetworks.Google !== 0">
-            <p ng-bind-html="editorTabs.Google.content | google"></p>
+          <div class="fade-in post-preview gp" ng-show="previewTabs.activeTab == 'Google' && activeNetworks.Google !== 0">
+            <i class="fa fa-google-plus"></i>
+            <div class="card">
+              <img class="avatar" src="/assets/images/default_gp.png" alt="Twitter Avatar" />
+              <span class="user-name"><strong>John Smith</strong></span>
+              <br/>
+              <span class="timestamp">Shared publicly - {{ currentTime | date:'MMM d, yyyy' }}</span>
+              <div class="clearfix">&nbsp;</div>
+              <p ng-bind-html="editorTabs.Google.content | google"></p>
+              <img class="post-image" ng-if="editorTabs.Google.image" ng-src="{{ editorTabs.Google.image }}" alt="{{ editorTabs.Google.image }}" />
+
+            </div>
           </div>
 
         </div>
@@ -202,91 +257,112 @@
         <div class="amp-view" ng-if="currentState == 5">
           <!-- INTRO TEXT -->
           <p class="lead">Schedule your post.</p>
-          <!-- SCHEDULE TABLE -->
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th width="25%">Date</th>
-                <th width="25%">Time</th>
-                <th width="40%">Networks</th>
-                <th width="10%"></th>
-              </tr>
-            </thead>
-            <tbody>
+          <!--<p><small>Add a date and time and select the channels you'd like to publish to.</small></p>-->
+          <div class="row">
+            <div class="col-xs-6">
 
-              <tr ng-repeat="release in scheduledReleases">
-                <td>
-                  <input class="form-control" type="text" bs-datepicker="" date-format="fullDate" ng-model="release.dateTime" />
-                </td>
-                <td>
-                  <input class="form-control" type="text" bs-timepicker="" ng-model="release.dateTime" />
-                </td>
-                <td>
+              <!--<h4>Build a release</h4>-->
 
-                  <button ng-class="{ 'active': release.networks.Facebook == true }" class="btn btn-sm btn-default" ng-click="release.networks.Facebook = !release.networks.Facebook">
-                    <i class="fa fa-facebook"></i>
-                  </button>
-                  <button ng-class="{ 'active': release.networks.Twitter == true }" class="btn btn-sm btn-default" ng-click="release.networks.Twitter = !release.networks.Twitter">
+              <form class="row" action="">
+                <div class="col-xs-6">
+                  <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="text" date-format="fullDate" bs-datepicker="" ng-model="dateTime" class="form-control" id="date" placeholder="Date" />
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <div class="form-group">
+                    <label for="time">Time</label>
+                    <input type="text" bs-timepicker="" ng-model="dateTime" class="form-control" id="time" placeholder="Time" />
+                  </div>
+                </div>
+              </form>
+              <button class="btn btn-default" ng-click="addScheduledRelease()">Add new release</button>
+            </div>
+            <div class="col-xs-6">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th width="60%">Date</th>
+                  <th width="30%" class="text-center">Channels</th>
+                  <th width="10%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="release in scheduledReleases">
+                  <td>
+                    <p>{{ release.dateTime | date:'MMM d, y h:mm a' }}</p>
+                  </td>
+                  <td class="text-center">
+                    <i class="fa fa-facebook"></i> &nbsp;
                     <i class="fa fa-twitter"></i>
-                  </button>
-                  <button ng-class="{ 'active': release.networks.Google == true }" class="btn btn-sm btn-default" ng-click="release.networks.Google = !release.networks.Google">
-                    <i class="fa fa-google-plus"></i>
-                  </button>
-                  <button ng-class="{ 'active': release.networks.LinkedIn == true }" class="btn btn-sm btn-default" ng-click="release.networks.LinkedIn = !release.networks.LinkedIn">
-                    <i class="fa fa-linkedin"></i>
-                  </button>
-
-                </td>
-                <td>
-                  <button class="btn btn-default btn-sm pull-right" ng-click="removeRelease($index)" ng-show="scheduledReleases.length > 1">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-          <!-- FINAL SUBMIT BUTTON -->
-         <div class="text-center">
-           <button class="btn btn-default" ng-click="addScheduledRelease()">Add new release</button>
-           <button type="submit" class="btn btn-primary" ng-click="incrementState()">Schedule your post</button>
-         </div>
-
-
+                  </td>
+                  <td>
+                    <a ng-click="removeRelease($index)"><i class="fa fa-trash-o"></i></a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <!-- SUCCESS/ERROR VIEW -->
         <div class="amp-view text-center" ng-if="currentState == 6">
           <!-- SUCCESS TEXT -->
           <i class="fa fa-5x fa-check-circle text-success"></i>
         </div>
+
+
       </div>
       <!-- FOOTER -->
       <div class="modal-footer">
-        <div class="row">
-          <!-- BACK BUTTON -->
+        <div class="row text-left">
+          <!-- BACK BUTTON CONTAINER -->
           <div class="col-xs-4">
+            <!-- HIDE MODAL IN FUTURE CHECKBOX -->
+            <p ng-if="currentState == 0">
+              <input type="checkbox" /> &nbsp;
+              <small>Hide this help message in the future.</small>
+            </p>
+            <!-- BACK BUTTON -->
             <button ng-show="currentState >= 1 && currentState <= 5" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
           </div>
           <!-- PROGRESS BULLETS -->
           <div class="col-xs-4">
-            <p class="text-center text-muted" ng-show="currentState >= 1 && currentState < 6">
+
+            <p class="text-center text-silent" ng-show="currentState >= 1 && currentState < 6">
               <small>
                 <i ng-click="currentState = 1" ng-class="{ 'text-primary': currentState == 1 }" class="fa fa-circle"></i> &nbsp;
                 <i ng-click="currentState = 2" ng-class="{ 'text-primary': currentState == 2 }" class="fa fa-circle"></i> &nbsp;
                 <i ng-click="currentState = 3" ng-class="{ 'text-primary': currentState == 3 }" class="fa fa-circle"></i> &nbsp;
                 <i ng-click="currentState = 4" ng-class="{ 'text-primary': currentState == 4 }" class="fa fa-circle"></i> &nbsp;
                 <i ng-click="currentState = 5" ng-class="{ 'text-primary': currentState == 5 }" class="fa fa-circle"></i> &nbsp;
-                <!--<i ng-click="currentState = 6" ng-class="{ 'text-primary': currentState == 6 }" class="fa fa-circle"></i>-->
               </small>
             </p>
+
           </div>
           <!-- NEXT BUTTON -->
           <div class="col-xs-4">
-            <button ng-show="currentState >= 1 && currentState <= 4" type="button" class="btn btn-link" ng-click="incrementState()">Next &nbsp; <i class="fa fa-angle-double-right"></i></button>
-            <p class="text-muted pull-right" ng-show="currentState == 0">
-              <input type="checkbox" /> &nbsp;
-              <small>Hide this help message in the future.</small>
-            </p>
+            <button ng-show="currentState <= 5" type="button" class="btn btn-link pull-right" ng-click="incrementState()">
+              <span ng-if="currentState == 0">
+                Get Started &nbsp; <i class="fa fa-angle-double-right"></i>
+              </span>
+              <span ng-if="currentState == 1">
+                Select your channels &nbsp; <i class="fa fa-angle-double-right"></i>
+              </span>
+              <span ng-if="currentState == 2">
+                Author your post &nbsp; <i class="fa fa-angle-double-right"></i>
+              </span>
+              <span ng-if="currentState == 3">
+                Preview your post &nbsp; <i class="fa fa-angle-double-right"></i>
+              </span>
+              <span ng-if="currentState == 4">
+                Schedule your post &nbsp; <i class="fa fa-angle-double-right"></i>
+              </span>
+              <span ng-if="currentState == 5">
+                <i class="fa fa-check"></i> &nbsp; Submit Your Post
+              </span>
+            </button>
           </div>
         </div>
       </div>

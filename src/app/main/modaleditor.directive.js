@@ -7,7 +7,8 @@ angular.module('crescendoBs')
       controller: 'ModalEditorCtrl',
       scope: {
         postText: "=",
-        maxChars: "="
+        maxChars: "=",
+        activeImg: "="
       }
     }
   });
