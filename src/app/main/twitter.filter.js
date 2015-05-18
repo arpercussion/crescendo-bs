@@ -1,5 +1,6 @@
 angular.module('crescendoBs')
   .filter('twitter', function () {
+    'use strict';
     return function (text) {
       var twitterAt = /(^|\W+)\@([\w\-]+)/gm,
         twitterHashtag = /(^|\W+)\#([\w\-]+)/gm,

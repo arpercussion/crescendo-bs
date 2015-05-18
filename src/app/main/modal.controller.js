@@ -1,12 +1,12 @@
 angular.module('crescendoBs')
   .controller('AmplifyCtrl', function ($scope) {
-    "use strict";
+    'use strict';
 
     // Current view of Amplify Modal
     $scope.currentState = 0;
     // Selected piece of content to amplify
     $scope.activeContent = {
-      "item": ""
+      'item': ''
     };
     // Active Editor tab
     $scope.editorTabsActiveTab = 0;
@@ -22,87 +22,87 @@ angular.module('crescendoBs')
     $scope.deployementEvent = {
       dateTime: new Date(),
       networks:{
-        "Facebook": false,
-        "Twitter": false,
-        "LinkedIn": false,
-        "Google": false
+        'Facebook': false,
+        'Twitter': false,
+        'LinkedIn': false,
+        'Google': false
       }
     };
 
     // TODO: pull contents from Content API
     $scope.contents = [
       {
-        "id": "1",
-        "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "type": "Blog",
-        "author": "Karen Peña",
-        "publicationDate": new Date('04/15/15 02:30 PM'),
-        "url": "http://perc.li/E450x"
+        'id': '1',
+        'title': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        'type': 'Blog',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('04/15/15 02:30 PM'),
+        'url': 'http://perc.li/E450x'
       },
       {
-        "id": "2",
-        "title": "Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie.",
-        "type": "Blog",
-        "author": "Karen Peña",
-        "publicationDate": new Date('04/15/15 02:30 PM'),
-        "url": "http://perc.li/HoJ0p"
+        'id': '2',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie.',
+        'type': 'Blog',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('04/15/15 02:30 PM'),
+        'url': 'http://perc.li/HoJ0p'
       },
       {
-        "id": "3",
-        "title": "Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.",
-        "type": "PDF",
-        "author": "Karen Peña",
-        "publicationDate": new Date('04/15/15 02:30 PM'),
-        "url": "http://perc.li/d3Dr4"
+        'id': '3',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'PDF',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('04/15/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
       }
     ];
 
     // TODO: get social accounts from Social Account API
     $scope.socialAccounts = [
       {
-        "id": "1",
-        "channel": "Facebook",
-        "name": "Karen Peña",
-        "handle": "karen.pena",
-        "avatarUrl": "http://goo.gl/EFDcA2"
+        'id': '1',
+        'channel': 'Facebook',
+        'name': 'Karen Peña',
+        'handle': 'karen.pena',
+        'avatarUrl': 'http://goo.gl/EFDcA2'
       },
       {
-        "id": "2",
-        "channel": "Facebook",
-        "name": "Karen Peña",
-        "handle": "Nightime Solar",
-        "avatarUrl": "http://goo.gl/HDP0Rk"
+        'id': '2',
+        'channel': 'Facebook',
+        'name': 'Karen Peña',
+        'handle': 'Nightime Solar',
+        'avatarUrl': 'http://goo.gl/HDP0Rk'
       },
       {
-        "id": "3",
-        "channel": "Twitter",
-        "name": "Karen Peña",
-        "handle": "kpena",
-        "avatarUrl": "http://goo.gl/ozR3mQ"
+        'id': '3',
+        'channel': 'Twitter',
+        'name': 'Karen Peña',
+        'handle': 'kpena',
+        'avatarUrl': 'http://goo.gl/ozR3mQ'
       },
       {
-        "id": "4",
-        "channel": "Google",
-        "name": "Karen Peña",
-        "handle": "Nightime Solar",
-        "avatarUrl": "http://goo.gl/PNoGgd"
+        'id': '4',
+        'channel': 'Google',
+        'name': 'Karen Peña',
+        'handle': 'Nightime Solar',
+        'avatarUrl': 'http://goo.gl/PNoGgd'
       },
       {
-        "id": "5",
-        "channel": "LinkedIn",
-        "name": "Karen Peña",
-        "handle": "Nightime Solar",
-        "avatarUrl": "http://goo.gl/tycz5Y"
+        'id': '5',
+        'channel': 'LinkedIn',
+        'name': 'Karen Peña',
+        'handle': 'Nightime Solar',
+        'avatarUrl': 'http://goo.gl/tycz5Y'
       }
     ];
 
     $scope.activeAccounts = [];
 
     $scope.activeNetworks = {
-      "Facebook": 0,
-      "Twitter": 0,
-      "LinkedIn": 0,
-      "Google": 0
+      'Facebook': 0,
+      'Twitter': 0,
+      'LinkedIn': 0,
+      'Google': 0
     };
 
     $scope.activeAccountChange = function(action, account){
@@ -126,7 +126,7 @@ angular.module('crescendoBs')
       } else {
         // Remove account from active accounts
         angular.forEach($scope.activeAccounts, function(value, key){
-          if(value.id == account.id){
+          if(value.id === account.id){
             $scope.activeAccounts.splice(key, 1);
             switch(account.channel) {
               case 'Facebook':
@@ -143,7 +143,7 @@ angular.module('crescendoBs')
                 break;
             }
           }
-        })
+        });
       }
     };
 
@@ -159,36 +159,36 @@ angular.module('crescendoBs')
 
     // Define Editor tabs and html partials
     $scope.editorTabs = {
-      "Facebook": {
-        "content": "",
-        "image": ""
+      'Facebook': {
+        'content': '',
+        'image': ''
       },
-      "Twitter": {
-        "content": "",
-        "image": ""
+      'Twitter': {
+        'content': '',
+        'image': ''
       },
-      "LinkedIn": {
-        "content": "",
-        "image": ""
+      'LinkedIn': {
+        'content': '',
+        'image': ''
       },
-      "Google": {
-        "content": "",
-        "image": ""
+      'Google': {
+        'content': '',
+        'image': ''
       },
-      activeTab: "Facebook"
+      activeTab: 'Facebook'
     };
 
     // Define preview tabs and html partials
     $scope.previewTabs  = {
-      "Facebook": {
+      'Facebook': {
       },
-      "Twitter": {
+      'Twitter': {
       },
-      "LinkedIn": {
+      'LinkedIn': {
       },
-      "Google": {
+      'Google': {
       },
-      activeTab: "Facebook"
+      activeTab: 'Facebook'
     };
 
 
@@ -196,13 +196,13 @@ angular.module('crescendoBs')
     $scope.addScheduledRelease = function(timestamp, networks){
       if(timestamp && networks){
         var newRelease = {
-          "id": "1",
-          "dateTime": timestamp,
-          "networks": {
-            "Facebook": networks.Facebook,
-            "Twitter": networks.Twitter,
-            "LinkedIn": networks.LinkedIn,
-            "Google": networks.Google
+          'id': '1',
+          'dateTime': timestamp,
+          'networks': {
+            'Facebook': networks.Facebook,
+            'Twitter': networks.Twitter,
+            'LinkedIn': networks.LinkedIn,
+            'Google': networks.Google
           }
         };
         $scope.scheduledReleases.push(newRelease);
@@ -218,12 +218,12 @@ angular.module('crescendoBs')
 
 
     // Least expensive $watch function for state fixing
-    $scope.$watch('currentState', function(newValue, oldValue){
+    $scope.$watch('currentState', function(newValue){
       // Check to see what networks are available to set the
       // first one as the active tab in the editor and the
       // previewer tabs.
 
-      if(newValue == 3){
+      if(newValue === 3){
         $scope.setActiveTab();
         $scope.userHasEdited = true;
 
@@ -256,24 +256,24 @@ angular.module('crescendoBs')
     $scope.findActiveNetwork = function(){
       if($scope.activeNetworks.Facebook > 0){
         $scope.isNoAccountSelected = false;
-        return "Facebook";
+        return 'Facebook';
       } else if($scope.activeNetworks.Twitter > 0){
         $scope.isNoAccountSelected = false;
-        return "Twitter";
+        return 'Twitter';
       } else if($scope.activeNetworks.LinkedIn > 0){
         $scope.isNoAccountSelected = false;
-        return "LinkedIn";
+        return 'LinkedIn';
       } else if($scope.activeNetworks.Google > 0){
         $scope.isNoAccountSelected = false;
-        return "Google";
+        return 'Google';
       } else {
         // Prevent the user from having zero selected networks.
         $scope.currentState = 2;
         $scope.isNoAccountSelected = true;
 
-        return "Facebook";
+        return 'Facebook';
       }
-    }
+    };
 
 
   });

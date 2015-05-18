@@ -1,5 +1,6 @@
 angular.module('crescendoBs')
   .filter('facebook', function () {
+    'use strict';
     return function(text){
       var fbHashtag = /(^|\W+)\#([\w\-]+)/gm,
         httpUrl = /(^|\s)((https?:\/\/)?[\w\-]+(\.[\w\-]+)+\.?(:\d+)?(\/\S*)?)/gi,

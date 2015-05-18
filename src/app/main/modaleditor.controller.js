@@ -1,45 +1,47 @@
 angular.module('crescendoBs')
   .controller('ModalEditorCtrl', function($scope){
+    'use strict';
+
     $scope.limit = $scope.maxChars;
 
 
     // TODO: Bind to Hashtag API
     $scope.hashtags = [
       {
-        "id": "1",
-        "tag": "#foo"
+        'id': '1',
+        'tag': '#foo'
       },
       {
-        "id": "2",
-        "tag": "#bar"
+        'id': '2',
+        'tag': '#bar'
       },
       {
-        "id": "3",
-        "tag": "#doge"
+        'id': '3',
+        'tag': '#doge'
       },
       {
-        "id": "4",
-        "tag": "#wow"
+        'id': '4',
+        'tag': '#wow'
       }
     ];
 
 
     $scope.images = [
       {
-        "id": "1",
-        "url": "http://goo.gl/EFDcA2"
+        'id': '1',
+        'url': 'http://goo.gl/EFDcA2'
       },
       {
-        "id": "2",
-        "url": "http://goo.gl/HDP0Rk"
+        'id': '2',
+        'url': 'http://goo.gl/HDP0Rk'
       },
       {
-        "id": "3",
-        "url": "http://goo.gl/ozR3mQ"
+        'id': '3',
+        'url': 'http://goo.gl/ozR3mQ'
       },
       {
-        "id": "4",
-        "url": "http://goo.gl/PNoGgd"
+        'id': '4',
+        'url': 'http://goo.gl/PNoGgd'
       }
     ];
 

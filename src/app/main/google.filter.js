@@ -1,5 +1,6 @@
 angular.module('crescendoBs')
   .filter('google', function () {
+    'use strict';
     return function (text) {
       var gp = /(^|\W+)\+([\w\-]+)/gm,
         gpHashtag = /(^|\W+)\#([\w\-]+)/gm,
