@@ -229,7 +229,7 @@ angular.module('crescendoBs')
 
         // Add the title and the minified URL to the body of
         // the post messages.
-        if($scope.activeContent.item){
+        if($scope.activeContent.item.title && $scope.activeContent.item.url){
           $scope.setContentForAll($scope.activeContent.item.title + ' ' + $scope.activeContent.item.url);
         } else {
           $scope.setContentForAll('');
