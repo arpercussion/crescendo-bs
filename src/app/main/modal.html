@@ -309,11 +309,11 @@
                 <small>Make sure to add a social network.</small>
               </p>
 
-              <button ng-disabled="deployementEvent.networks.Facebook == false && deployementEvent.networks.Twitter == false && deployementEvent.networks.Google == false && deployementEvent.networks.LinkedIn == false" class="btn btn-default btn-block" ng-click="addScheduledRelease(deployementEvent.dateTime, deployementEvent.networks)">Add new release</button>
+              <button ng-disabled="deployementEvent.networks.Facebook == false && deployementEvent.networks.Twitter == false && deployementEvent.networks.Google == false && deployementEvent.networks.LinkedIn == false" class="btn btn-default btn-block" ng-click="addScheduledRelease(deployementEvent.dateTime, deployementEvent.networks)">Submit For Scheduling</button>
             </div>
 
             <div class="col-xs-6 schedule-table">
-              <h4>Deployments</h4>
+              <h4>Scheduled Posts</h4>
               <table class="table table-striped">
                 <thead>
                 <tr>
@@ -326,7 +326,7 @@
                 <tr ng-if="scheduledReleases.length == 0">
                   <td colspan="3">
                     <p class="text-center text-muted">
-                      Add a deployment.
+                      Add at least one scheduled post.
                     </p>
                   </td>
                 </tr>
@@ -373,7 +373,27 @@
               <small>Hide this help message in the future.</small>
             </p>
             <!-- BACK BUTTON -->
-            <button ng-show="currentState >= 1 && currentState <= 5" class="btn btn-link pull-left text-muted" ng-click="decrementState()"><i class="fa fa-angle-double-left"></i> &nbsp; Back</button>
+            <button ng-show="currentState >= 1 && currentState <= 5" class="btn btn-link pull-left text-muted" ng-click="decrementState()">
+              <i class="fa fa-angle-double-left"></i> &nbsp;
+              <span ng-if="currentState == 1">
+                Back to Help
+              </span>
+              <span ng-if="currentState == 2">
+                Select your Content
+              </span>
+              <span ng-if="currentState == 3">
+                Select your channels
+              </span>
+              <span ng-if="currentState == 4">
+                Author your post
+              </span>
+              <span ng-if="currentState == 5">
+                Preview your post
+              </span>
+              <span ng-if="currentState == 6">
+                Schedule your post
+              </span>
+            </button>
           </div>
           <!-- PROGRESS BULLETS -->
           <div class="col-xs-4">

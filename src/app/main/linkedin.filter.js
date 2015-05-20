@@ -7,6 +7,6 @@ angular.module('crescendoBs')
       // Remove all http:// and https://
       return text.replace(checkPrefix, '')
         // http://
-        .replace(httpUrl, '$1<a class="handle" href="http://$2" target="_blank">http://$2</a>'); 
+        .replace(httpUrl, '$1<a class="handle" href="http://$2" target="_blank">http://$2</a>');
     };
   });
