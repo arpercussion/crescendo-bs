@@ -6,11 +6,11 @@
         <!-- CLOSE BUTTON -->
         <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
         <!-- INTRO TEXT -->
-        <h2 ng-if="currentState == 1">Select a piece of content to amplify.</h2>
-        <h2 ng-if="currentState == 2">Select Social Media Accounts.</h2>
-        <h2 ng-if="currentState == 3">Compose your message.</h2>
-        <h2 ng-if="currentState == 4">Preview your posts.</h2>
-        <h2 ng-if="currentState == 5">Schedule your posts.</h2>
+        <h2 ng-if="currentState == 1">Select Your Content.</h2>
+        <h2 ng-if="currentState == 2">Select Social Channels.</h2>
+        <h2 ng-if="currentState == 3">Compose Your Message.</h2>
+        <h2 ng-if="currentState == 4">Preview Your Posts.</h2>
+        <h2 ng-if="currentState == 5">Schedule Your Posts.</h2>
         <h2 ng-if="currentState == 6">Success!</h2>
 
       </div>
@@ -75,6 +75,7 @@
                   <strong>Warning: </strong>Changing your content will delete your current post.
                 </p>
                 <!-- NO CONTENT ROW -->
+                <!--
                 <div ng-class="{ 'active' : !activeContent.item.id }" class="media" ng-click="activeContent.item = {}">
                   <div class="media-left">
                     <i class="fa fa-2x fa-ban"></i>
@@ -84,16 +85,23 @@
                     If you don't want to amplify a piece of content, we won't make you. Selecting this option allows you to post whatever you want to whatever networks your have configured.
                   </div>
                 </div>
+                -->
+
                 <!-- CONTENT REPEATER -->
-                <div ng-class="{ 'active' : activeContent.item.id == content.id }" class="media" ng-repeat="content in contents" ng-click="activeContent.item = content">
+                <div ng-class="{ 'active' : activeContent.item.id == content.id }" class="media" ng-repeat="content in contents" ng-click="updateActiveContent(content)">
                   <div class="media-left">
-                    <i class="fa fa-2x fa-file-o" ng-if="content.type == 'Blog'"></i>
-                    <i class="fa fa-2x fa-file-pdf-o" ng-if="content.type == 'PDF'"></i>
+                    <i ng-class="{'fa-file-o': content.type === 'Blog', 'fa-file-pdf-o' : content.type === 'PDF' }" class="fa"></i>
                   </div>
                   <div class="media-body">
+
+                    <i ng-class="{ 'fa-square-o ': activeContent.item.id !== content.id, 'fa-check-square-o': activeContent.item.id === content.id }" class="fa pull-right"></i>
+
                     <h4 class="media-heading">{{ content.title }}</h4>
                     {{ content.author }} <br/>
                     {{ content.publicationDate | date:'medium' }}
+
+
+
                   </div>
                 </div>
               </div>
@@ -297,11 +305,6 @@
                     </div>
                   </div>
 
-
-
-
-
-
                 </div>
                 <div class="clearfix">&nbsp;</div>
               </form>
@@ -379,19 +382,19 @@
                 Back to Help
               </span>
               <span ng-if="currentState == 2">
-                Select your Content
+                Select Your Content
               </span>
               <span ng-if="currentState == 3">
-                Select your channels
+                Select Your Social Channels
               </span>
               <span ng-if="currentState == 4">
-                Author your post
+                Author Your Posts
               </span>
               <span ng-if="currentState == 5">
-                Preview your post
+                Preview Your Posts
               </span>
               <span ng-if="currentState == 6">
-                Schedule your post
+                Schedule Your Posts
               </span>
             </button>
           </div>
@@ -416,16 +419,16 @@
                 Get Started &nbsp; <i class="fa fa-angle-double-right"></i>
               </span>
               <span ng-if="currentState == 1">
-                Select your channels &nbsp; <i class="fa fa-angle-double-right"></i>
+                Select Your Social Channels &nbsp; <i class="fa fa-angle-double-right"></i>
               </span>
               <span ng-if="currentState == 2">
-                Author your post &nbsp; <i class="fa fa-angle-double-right"></i>
+                Author Your Posts &nbsp; <i class="fa fa-angle-double-right"></i>
               </span>
               <span ng-if="currentState == 3">
-                Preview your post &nbsp; <i class="fa fa-angle-double-right"></i>
+                Preview Your Posts &nbsp; <i class="fa fa-angle-double-right"></i>
               </span>
               <span ng-if="currentState == 4">
-                Schedule your post &nbsp; <i class="fa fa-angle-double-right"></i>
+                Schedule Your Posts &nbsp; <i class="fa fa-angle-double-right"></i>
               </span>
               <span ng-if="currentState == 5">
                 <i class="fa fa-check"></i> &nbsp; Submit Your Post

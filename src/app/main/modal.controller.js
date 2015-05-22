@@ -3,7 +3,7 @@ angular.module('crescendoBs')
     'use strict';
 
     // Current view of Amplify Modal
-    $scope.currentState = 0;
+    $scope.currentState = 1;
     // Selected piece of content to amplify
     $scope.activeContent = {
       'item': ''
@@ -43,7 +43,7 @@ angular.module('crescendoBs')
         'id': '2',
         'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie.',
         'type': 'Blog',
-        'author': 'Karen Peña',
+        'author': 'Chris Perkins',
         'publicationDate': new Date('04/15/15 02:30 PM'),
         'url': 'http://perc.li/HoJ0p'
       },
@@ -54,8 +54,72 @@ angular.module('crescendoBs')
         'author': 'Karen Peña',
         'publicationDate': new Date('04/15/15 02:30 PM'),
         'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '4',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'Blog',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('04/01/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '5',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'PDF',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('03/23/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '6',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'Blog',
+        'author': 'Chris Perkins',
+        'publicationDate': new Date('03/20/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '7',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'Blog',
+        'author': 'Chris Perkins',
+        'publicationDate': new Date('03/15/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '8',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'PDF',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('03/12/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '9',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'Blog',
+        'author': 'Karen Peña',
+        'publicationDate': new Date('02/15/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
+      },
+      {
+        'id': '10',
+        'title': 'Aliquam erat volutpat. Maecenas laoreet fringilla risus, molestie auctor.',
+        'type': 'PDF',
+        'author': 'Chris Perkins',
+        'publicationDate': new Date('02/10/15 02:30 PM'),
+        'url': 'http://perc.li/d3Dr4'
       }
     ];
+
+    $scope.updateActiveContent = function(newContent){
+      if(newContent.id === $scope.activeContent.item.id){
+        $scope.activeContent.item = {};
+      } else {
+        $scope.activeContent.item = newContent;
+      }
+    }
 
     // TODO: get social accounts from Social Account API
     $scope.socialAccounts = [
