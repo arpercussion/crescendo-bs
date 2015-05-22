@@ -3,7 +3,7 @@ angular.module('crescendoBs')
     'use strict';
 
     // Current view of Amplify Modal
-    $scope.currentState = 1;
+    $scope.currentState = 0;
     // Selected piece of content to amplify
     $scope.activeContent = {
       'item': ''
